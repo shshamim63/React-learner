@@ -6,7 +6,8 @@
 .numbers {
   display: grid;
   grid-template-columns: auto auto auto;
-  padding: 10px
+  padding: 10px;
+  margin-top: 15px;
 }
 
 .active {
@@ -48,4 +49,12 @@
   font-weight: bold;
   text-align: center;
   border-radius: 16px;
+}
+
+.close {
+  float: right;
+  border: none;
+  background: white;
+  font-size: xx-large;
+  border-radius: 50%;
 }
