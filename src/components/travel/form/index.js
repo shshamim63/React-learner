@@ -1,7 +1,7 @@
 import { useState } from "react"
 import uuid from 'react-uuid';
 
-const Form = () => {
+const Form = ({addItem}) => {
   const [description, setDescription] = useState('')
   const [quantity, setQuantity] = useState(1)
   
@@ -11,6 +11,7 @@ const Form = () => {
     const newItem = {description, quantity, packed: false, id: uuid()}
     setDescription('')
     setQuantity(1)
+    addItem(newItem)
   }
 
   const handleOnChange = (e) => {

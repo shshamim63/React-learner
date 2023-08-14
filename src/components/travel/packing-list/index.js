@@ -1,35 +1,52 @@
+import { useState } from 'react'
+import Item from '../item'
 import './index.css'
 
-const initialItems = [
+const sortedType = [
   {
-    id: 1,
-    description: 'Passport',
-    quantity: 2,
-    packed: true
+    value:'input',
+    innerText: 'Sort by input order'
   },
   {
-    id: 2,
-    description: 'Socks',
-    quantity: 12,
-    packed: false
+    value:'description',
+    innerText: 'Sort by description'
+  },
+  {
+    value:'quantity',
+    innerText: 'Sort by quantity'
+  },
+  {
+    value:'packed',
+    innerText: 'Sort by packed'
   }
 ]
 
-const Item = ({item}) => {
-  return (
-    <li>
-      <span style={item.packed ? {textDecoration: 'line-through'} : {}}>{item.quantity}  {item.description}</span>
-      <button className="">❌</button>
-    </li>
-  )
-}
-
-const PackingList = () => {
+const PackingList = ({items, handleDeleteItem, handleToggleCheck}) => {
+  const [sortBy, setSortBy] = useState('input')
+  let sortedItem;
+  
+  if(sortBy === 'input') sortedItem = items
+  
+  if(sortBy === 'description') sortedItem = items.slice().sort((a,b) => a.description.localeCompare(b.description))
+  
+  if (sortBy === 'quantity') {
+    sortedItem = items.slice().sort((a,b) => a.quantity > b.quantity)
+  }
+  
+  if (sortBy === 'packed') {
+    sortedItem = items.slice().sort((a,b) => Number(a.packed) - Number(b.packed))
+  }
+  
   return (
     <div className="list">
       <ul className="list-container">
-        {initialItems.map(item => <Item key={item.id} item={item}/>)}
+        {sortedItem.map(item => <Item key={item.id} item={item} removeItem={handleDeleteItem}  handleToggleCheck={handleToggleCheck}/>)}
       </ul>
+      <div className='actions'>
+        <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+          {sortedType && sortedType.map(item=> <option key={item.value} value={item.value}>{item.innerText}</option>)}
+        </select>
+      </div>
     </div>
   )
 }
