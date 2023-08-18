@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import './index.css'
-import { Box, Button, Grid, Card, CardHeader, CardContent } from '@mui/material';
+import { Box, Button, Grid, Card, CardHeader, CardContent, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 const messages = [
   'Learn React',
@@ -29,8 +32,9 @@ export const Step = () => {
 
   const calculateActiveStyling = (currentStatus) => {
     return {
-      width:25, 
+      width: 25, 
       height: 25,
+      color: stepNumber >= currentStatus ? 'white' : 'black',
       backgroundColor: stepNumber >= currentStatus ? 'primary.dark' : '#fff',
       border: 'none',
       borderRadius: '50%',
@@ -63,15 +67,30 @@ export const Step = () => {
                   <Box sx = {calculateActiveStyling(3)}>3</Box>
                 </Grid>
               </Grid>
-              <p className='message'>Step {stepNumber}: {messages[stepNumber-1]}</p>
-              <Box className='buttons'>
-                  <button className='previous' onClick={handlePrevious}>Previous</button>
-                  <button className='next' onClick={handleNext}>Next</button>
-              </Box>
+              <Typography variant="subtitle1" sx={{ marginTop: '30px', marginBottom: '30px', textAlign: 'center' }}>Step {stepNumber}: {messages[stepNumber-1]}</Typography>
+              <Stack direction="row" spacing={35}>
+                <Button variant="outlined" onClick={handlePrevious} startIcon={<ArrowLeftIcon />}>
+                    Previous
+                </Button>
+                <Button variant="contained" onClick={handleNext} endIcon={<ArrowRightIcon />}>
+                  Next
+                </Button>
+              </Stack>
             </Box>
             )
           }
-          { !isOpen }
+          { !isOpen && (
+              <Grid container spacing={1} sx={{height: 150}}>
+                <Grid xs={4}></Grid>
+                <Grid item xs={4} sx={{textAlign: 'center'}}>
+                  <IconButton aria-label="show-progess" size="large" sx={{marginTop: 6, backgroundColor: 'wheat', color: 'white'}} onClick={handleOnClick}>
+                    <AddCircleOutlineRoundedIcon fontSize="inherit" />
+                  </IconButton>
+                  <Typography variant='subtitle2' sx={{marginTop: 2}}>Enable progress</Typography>
+                </Grid>
+                <Grid xs={4}></Grid>
+              </Grid>
+          )}
       </CardContent>
     </Card>
     
