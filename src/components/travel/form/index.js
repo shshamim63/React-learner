@@ -1,4 +1,8 @@
+import { FormControl, Typography, TextField, MenuItem, Button, Grid, Box, Stack } from "@mui/material";
+import AddCardIcon from '@mui/icons-material/AddCard';
+
 import { useState } from "react"
+
 import uuid from 'react-uuid';
 
 const Form = ({addItem}) => {
@@ -23,15 +27,37 @@ const Form = ({addItem}) => {
   }
 
   return (
-    <form className="add-form" onSubmit={handleSubmit}>
-      <h3>What do you need for your trip? 😍</h3>
-      <select value={quantity} onChange={handleOnSelectChange}>
-        {Array.from({length: 20}, (_, i) => i+1).map((val) => 
-          (<option key={val+1} value={val}>{val}</option>))}
-      </select>
-      <input type="text" placeholder="item..." value={description} onChange={handleOnChange}></input>
-      <button type="submit">Add</button>
-    </form>
+    <Box sx={{marginTop: 2}}>
+      <Grid container spacing={1}>
+        <Grid item xs={5}>
+          <Typography sx={{ height: 'auto', lineHeight: 3, textAlign: 'center' }} variant="subtitle2">What would you like to bring to your trip? 😍</Typography>
+        </Grid>
+        <Grid item xs={7}>
+          <form onSubmit={handleSubmit}>
+            <FormControl className="add-form" sx={{width: 'auto', margin: 'auto'}}>    
+              <Stack direction="row" spacing={1}>
+                <TextField 
+                  id="outlined-item-number"
+                  select
+                  label="Select"
+                  defaultValue={1}
+                  helperText="Enter quantity"
+                  size="small"
+                  onChange={handleOnSelectChange}
+                >
+                  {Array.from({length: 20}, (_, i) => i+1).map((val) => 
+                    (<MenuItem key={val+1} value={val}>{val}</MenuItem>))}
+                </TextField>
+                <TextField size="small" id="outlined-basic" label="item" variant="outlined" value={description} onChange={handleOnChange} />
+                <Button type="submit" size="small" variant="contained" endIcon={<AddCardIcon />} sx={{height: 40}} >
+                  Add
+                </Button>
+              </Stack>
+            </FormControl>
+          </form>
+        </Grid>
+      </Grid>
+    </Box>
   )
 }
 

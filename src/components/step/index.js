@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './index.css'
 import { Box, Button, Grid, Card, CardHeader, CardContent, Stack, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
