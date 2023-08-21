@@ -1,10 +1,20 @@
+import { Stack, Typography, Button, Checkbox } from "@mui/material"
+
+const calculateCheckedProperty = (checked) => {
+  if (checked) {
+    return {
+      textDecoration: 'line-through'
+    }
+  }
+}
+
 const Item = ({item, removeItem, handleToggleCheck}) => {
   return (
-    <li>
-      <input type="checkbox" value={item.packed} onChange={() => handleToggleCheck(item.id)}></input>
-      <span style={item.packed ? {textDecoration: 'line-through'} : {}}>{item.quantity}  {item.description}</span>
-      <button className="delete" onClick={() => removeItem(item.id)}>❌</button>
-    </li>
+    <Stack direction="row" useFlexGap flexWrap="wrap">
+      <Checkbox checked={item.packed} onChange={() => handleToggleCheck(item.id)} />
+      <Typography sx={{...calculateCheckedProperty(item.packed), height: 'auto', lineHeight: 3}}>{item.quantity}  {item.description}</Typography>
+      <Button onClick={() => removeItem(item.id)}>❌</Button>
+    </Stack>
   )
 }
 

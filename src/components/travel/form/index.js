@@ -27,7 +27,7 @@ const Form = ({addItem}) => {
   }
 
   return (
-    <Box sx={{marginTop: 2}}>
+    <Box sx={{md: {width: 50}, marginTop: 2}}>
       <Grid container spacing={1}>
         <Grid item xs={5}>
           <Typography sx={{ height: 'auto', lineHeight: 3, textAlign: 'center' }} variant="subtitle2">What would you like to bring to your trip? 😍</Typography>
@@ -40,7 +40,7 @@ const Form = ({addItem}) => {
                   id="outlined-item-number"
                   select
                   label="Select"
-                  defaultValue={1}
+                  value={quantity}
                   helperText="Enter quantity"
                   size="small"
                   onChange={handleOnSelectChange}
