@@ -17,7 +17,7 @@ function App() {
       <main>
         <div>
           <Container maxWidth='lg'>
-            {/* <Step></Step> */}
+            <Step></Step>
             <Travel></Travel>
           </Container>
         </div>
