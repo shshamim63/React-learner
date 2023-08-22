@@ -18,8 +18,8 @@ function App() {
         <div>
           <Container maxWidth='lg'>
             <Step></Step>
-            <Travel></Travel>
           </Container>
+          <Travel></Travel>
         </div>
       </main>
     </>

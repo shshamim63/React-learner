@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
+import { Container, Box, Grid, Stack, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
 import { useState } from 'react'
 import Item from '../item'
 
@@ -38,7 +38,26 @@ const PackingList = ({items, handleDeleteItem, handleToggleCheck}) => {
   }
   
   return (
-    <Box>
+    <Container>
+      { sortedItem.length > 0 && (
+        <Grid container direction="row-reverse" marginBottom={2}>
+          <Grid item>
+            <FormControl >
+              <InputLabel id="sort-by">Sort By</InputLabel>
+              <Select
+                labelId="sort-by"
+                id="sort-by"
+                value={sortBy}
+                label="Sort By"
+                onChange={e => setSortBy(e.target.value)}
+                size='small'
+              >
+                {sortedType && sortedType.map(item=> <MenuItem key={item.value} value={item.value}>{item.innerText}</MenuItem>)}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
+      )}
       <Stack spacing={{ xs: 1, sm: 2 }} direction="row" useFlexGap flexWrap="wrap">
         {sortedItem.map((item, index) => (
           <Grid item xs={2} sm={3} md={3} key={index}>
@@ -46,25 +65,7 @@ const PackingList = ({items, handleDeleteItem, handleToggleCheck}) => {
           </Grid>
         ))}
       </Stack>
-      { sortedItem.length > 0 && (<Box sx={{ width: '100%', marginTop: 3 }}>
-        <Stack direction="row" spacing={{ xs: 1, sm: 2, md: 4 }} justifyContent="center">
-          <Typography variant='subtitle2' sx={{ height: 'auto', lineHeight: 2.5, marginRight: 1 }}>Sort the items by</Typography>
-          <FormControl >
-            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={sortBy}
-              label="Age"
-              onChange={e => setSortBy(e.target.value)}
-              size='small'
-            >
-              {sortedType && sortedType.map(item=> <MenuItem key={item.value} value={item.value}>{item.innerText}</MenuItem>)}
-            </Select>
-          </FormControl>
-        </Stack>
-      </Box>)}
-    </Box>
+    </Container>
   )
 }
 

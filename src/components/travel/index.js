@@ -20,12 +20,12 @@ const Travel = () => {
   }
 
   return (
-    <div className="travel">
+    <>
       <Logo />
       <Form addItem={handleAddItem}/>
       <PackingList items={packingItem} handleDeleteItem={handleDeleteItem} handleToggleCheck={handleToggleCheck}/>
       <Status items={packingItem}/>
-    </div>
+    </>
   )
 }
 
