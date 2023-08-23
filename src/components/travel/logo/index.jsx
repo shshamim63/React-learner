@@ -1,5 +1,6 @@
-import { Container, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { Container, Typography } from '@mui/material'
 
 const themeHeader = createTheme();
 
@@ -18,7 +19,7 @@ const Logo = () => {
   return (
     <Container>
       <ThemeProvider theme={themeHeader}>
-        <Typography variant='h2' sx={{ backgroundColor: 'wheat', height: 85, textAlign: 'center'}}>🌴 Far Away 🧳</Typography> 
+        <Typography variant='h2' sx={{ backgroundColor: 'wheat', height: 85, textAlign: 'center', marginTop: 2}}>🌴 Far Away 🧳</Typography> 
       </ThemeProvider>
     </Container>
   )

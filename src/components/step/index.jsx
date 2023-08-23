@@ -1,11 +1,11 @@
 import { useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Container, Button, Grid, Card, CardHeader, CardContent, Stack, Typography, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const messages = [
   'Learn React',
@@ -52,7 +52,7 @@ export const Step = () => {
       </ThemeProvider>
       <Typography variant='subtitle2' align='center' color='textSecondary' paragraph>Update your progess as you move forward</Typography>
       <Grid container spacing={2} justifyContent='center'>
-        <Grid item sm={8} md={5} lg={5}>
+        <Grid item xs={8} sm={6} md={5} lg={5}>
           <Card>
             {isOpen && <CardHeader
               action={
@@ -66,25 +66,25 @@ export const Step = () => {
             { isOpen && (
               <>
                 <Grid container spacing={1} justifyContent='center'>
-                  <Grid item sx={4} md={4} >
+                  <Grid item xs={4} sx={4} md={4} >
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 1 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>1</Typography>
                   </Grid>
-                  <Grid item sx={3} md={4}>
+                  <Grid item xs={4} sx={3} md={4}>
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 2 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>2</Typography>
                   </Grid>
-                  <Grid item sx={3} md={4}>
+                  <Grid item xs={4} sx={3} md={4}>
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 3 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>3</Typography>
                   </Grid>
                 </Grid>
                 <Typography variant="subtitle2" color='textSecondary' align='center' marginTop={4} paragraph>Step {stepNumber}: {messages[stepNumber-1]}</Typography>
                 <Grid container spacing={1} justifyContent='space-between'>
                   <Grid item>
-                    <Button variant="contained" onClick={handlePrevious} startIcon={<ArrowLeftIcon />}>
+                    <Button variant="contained" onClick={handlePrevious} size='small' startIcon={<ArrowLeftIcon />}>
                       Previous
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" onClick={handleNext} endIcon={<ArrowRightIcon />}>
+                    <Button variant="contained" onClick={handleNext} size='small' endIcon={<ArrowRightIcon />}>
                       Next
                     </Button>
                   </Grid>

@@ -1,8 +1,8 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { AppBar, Box, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const pages = ['Tracker', 'Travel', 'Expenses']
 
@@ -13,7 +13,7 @@ const NavBar = () => {
     setAnchorElNav(event.currentTarget)
   }
 
-  const handleCloseNavMenu = (selectedPage) => {
+  const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
@@ -69,7 +69,7 @@ const NavBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} component={Link} to={`/${page.toLowerCase()}`}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} to={`/${page.toLowerCase()}`}>
                   <Typography textAlign="center">{page.toLowerCase()}</Typography>
                 </MenuItem>
               ))}
@@ -95,11 +95,11 @@ const NavBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
+                onClick={handleCloseNavMenu}
                 component={Link} 
                 to={`/${page.toLowerCase()}`}
                 key={page}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                containerElement={<Link to='/travel'/>}
               >
                 {page}
               </Button>

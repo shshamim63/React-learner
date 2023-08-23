@@ -1,10 +1,11 @@
 import { useState } from "react"
 
+import uuid from 'react-uuid';
+
 import { FormControl, Typography, TextField, MenuItem, Button, Grid, Stack, InputLabel, Select } from "@mui/material";
 import AddCardIcon from '@mui/icons-material/AddCard';
 
 
-import uuid from 'react-uuid';
 
 
 const ITEM_HEIGHT = 48;
@@ -42,11 +43,11 @@ const Form = ({addItem}) => {
   return (
     <Grid container justifyContent='center' spacing={1} marginTop={1} marginBottom={5}>
       <Grid item md={5}>
-        <Typography variant="subtitle2" color='textSecondary' align="right" lineHeight={3}>What would you like to bring to your trip? 😍</Typography>
+        <Typography variant="subtitle2" color='textSecondary' align="right" lineHeight={4}>What would you like to bring to your trip? 😍</Typography>
       </Grid>
       <Grid item md={6}>
         <form onSubmit={handleSubmit}>
-          <Stack direction='row' spacing={1}>
+          <Stack direction='row' spacing={1} margin={1}>
               <FormControl>
                 <InputLabel id="item-quantity">Quantity</InputLabel>
                 <Select
@@ -71,7 +72,7 @@ const Form = ({addItem}) => {
                 value={description}
                 onChange={handleOnChange}
               />
-              <Button type="submit" variant="contained" size="medium" sendIcon={<AddCardIcon />}>
+              <Button type="submit" variant="contained" size="medium" endIcon={<AddCardIcon />}>
                 Add
               </Button>
           </Stack> 
