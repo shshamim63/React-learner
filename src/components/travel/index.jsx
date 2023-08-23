@@ -1,8 +1,9 @@
+import { useState } from "react"
+
 import Logo from "./logo"
 import Form from "./form"
 import PackingList from "./packing-list"
 import Status from "./status"
-import { useState } from "react"
 
 const Travel = () => {
   const [packingItem, setPackingItem] = useState([])
