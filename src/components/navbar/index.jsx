@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import { AppBar, Box, Container, IconButton, Toolbar, Typography, Menu, MenuItem, Button } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-
-const pages = ['Tracker', 'Travel', 'Expenses']
+import { pages } from '../../contants/utils'
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);

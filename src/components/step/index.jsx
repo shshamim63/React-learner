@@ -66,13 +66,13 @@ export const Step = () => {
             { isOpen && (
               <>
                 <Grid container spacing={1} justifyContent='center'>
-                  <Grid item xs={4} sx={4} md={4} >
+                  <Grid item xs={4} sm={4} md={4} >
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 1 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>1</Typography>
                   </Grid>
-                  <Grid item xs={4} sx={3} md={4}>
+                  <Grid item xs={4} sm={3} md={4}>
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 2 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>2</Typography>
                   </Grid>
-                  <Grid item xs={4} sx={3} md={4}>
+                  <Grid item xs={4} sm={3} md={4}>
                     <Typography variant='h6' align='center' backgroundColor={ stepNumber >= 3 ? "primary.dark" : 'white'} width={35} borderRadius={50} margin='auto'>3</Typography>
                   </Grid>
                 </Grid>
