@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Grid, List, Button, Box } from "@mui/material";
+import { Grid, List, Button, Box, Paper } from "@mui/material";
 
 import { customColor } from "../../style";
 
@@ -31,14 +31,16 @@ const friends = [
 const ContributorList = () => {
   const [buttonVisibitity, setbuttonVisibility] = useState(true);
   return (
-    <Grid minWidth={400} item xs={8} sm={5} md={5} lg={5}>
-      <List>
-        {friends && [
-          ...friends.map((friend) => (
-            <Contributor key={friend.id} user={friend}></Contributor>
-          )),
-        ]}
-      </List>
+    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
+      <Paper variant="outlined" sx={{ padding: { lg: 10, md: 5 } }}>
+        <List>
+          {friends && [
+            ...friends.map((friend) => (
+              <Contributor key={friend.id} user={friend}></Contributor>
+            )),
+          ]}
+        </List>
+      </Paper>
       <Box marginTop={2}>
         {!buttonVisibitity && <AddFriendForm />}
         <Button
