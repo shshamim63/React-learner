@@ -1,6 +1,6 @@
 import { Stack, Typography, Button, Checkbox } from "@mui/material";
 
-const Item = ({ item, removeItem, handleToggleCheck }) => {
+const PackingItem = ({ item, removeItem, handleToggleCheck }) => {
   return (
     <Stack direction="row" useFlexGap flexWrap="wrap">
       <Checkbox
@@ -18,4 +18,4 @@ const Item = ({ item, removeItem, handleToggleCheck }) => {
   );
 };
 
-export default Item;
+export default PackingItem;

@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
-import Step from "./components/step";
-import Travel from "./components/travel";
-import Expenses from "./components/expenses";
+import Step from "./pages/Step";
+import Travel from "./pages/Travel";
+import Expenses from "./pages/Expenses";
 
 const AppRouter = () => {
   return (

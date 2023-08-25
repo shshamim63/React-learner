@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Container,
   Button,
@@ -18,19 +17,6 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 
 const messages = ["Learn React", "Apply for jobs", "Invest your new income"];
-
-const themeHeader = createTheme();
-
-themeHeader.typography.h4 = {
-  fontSize: "2rem",
-  lineHeight: "5.5rem",
-  "@media (min-width:600px)": {
-    fontSize: "2.5rem",
-  },
-  [themeHeader.breakpoints.up("md")]: {
-    fontSize: "3rem",
-  },
-};
 
 export const Step = () => {
   const [stepNumber, setStepNumber] = useState(1);
@@ -51,17 +37,15 @@ export const Step = () => {
 
   return (
     <Container maxWidth="lg">
-      <ThemeProvider theme={themeHeader}>
-        <Typography
-          variant="h4"
-          align="center"
-          color="textPrimary"
-          gutterBottom
-          marginTop={3}
-        >
-          Track Your Progress
-        </Typography>
-      </ThemeProvider>
+      <Typography
+        variant="h4"
+        align="center"
+        color="textPrimary"
+        gutterBottom
+        marginTop={3}
+      >
+        Track Your Progress
+      </Typography>
       <Typography
         variant="subtitle2"
         align="center"

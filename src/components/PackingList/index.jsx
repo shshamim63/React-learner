@@ -10,7 +10,7 @@ import {
   Select,
 } from "@mui/material";
 
-import Item from "../item";
+import PackingItem from "../PackingItem";
 
 const sortedType = [
   {
@@ -43,7 +43,7 @@ const PackingList = ({ items, handleDeleteItem, handleToggleCheck }) => {
       .sort((a, b) => a.description.localeCompare(b.description));
 
   if (sortBy === "quantity") {
-    sortedItem = items.slice().sort((a, b) => a.quantity > b.quantity);
+    sortedItem = items.slice().sort((a, b) => b.quantity - a.quantity);
   }
 
   if (sortBy === "packed") {
@@ -86,7 +86,7 @@ const PackingList = ({ items, handleDeleteItem, handleToggleCheck }) => {
       >
         {sortedItem.map((item, index) => (
           <Grid item xs={2} sm={3} md={3} key={index}>
-            <Item
+            <PackingItem
               key={item.id}
               item={item}
               removeItem={handleDeleteItem}

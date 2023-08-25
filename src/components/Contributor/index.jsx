@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mui/material";
 
-const User = ({ user }) => {
+const Contributor = ({ user }) => {
   return (
     <ListItem
       alignItems="flex-start"
@@ -40,4 +40,4 @@ const User = ({ user }) => {
   );
 };
 
-export default User;
+export default Contributor;

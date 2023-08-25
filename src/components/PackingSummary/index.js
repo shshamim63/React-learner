@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-const Status = ({ items }) => {
+const PackingSummary = ({ items }) => {
   const numItems = items.length;
   if (!numItems) {
     return (
@@ -54,4 +54,4 @@ const Status = ({ items }) => {
   );
 };
 
-export default Status;
+export default PackingSummary;

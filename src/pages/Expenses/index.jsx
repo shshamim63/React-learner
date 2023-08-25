@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
-import Contributors from "./contributors";
+import ContributorList from "../../components/ContributorList";
 
 const Expenses = () => {
   return (
     <Grid container justifyContent="center">
-      <Contributors />
+      <ContributorList />
     </Grid>
   );
 };

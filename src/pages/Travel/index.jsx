@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import Logo from "./logo";
-import Form from "./form";
-import PackingList from "./packing-list";
-import Status from "./status";
+import TravelLogo from "../../components/TravelLogo";
+import TravelForm from "../../components/TravelForm";
+import PackingList from "../../components/PackingList";
+import PackingSummary from "../../components/PackingSummary";
 
 const Travel = () => {
   const [packingItem, setPackingItem] = useState([]);
@@ -26,14 +26,14 @@ const Travel = () => {
 
   return (
     <>
-      <Logo />
-      <Form addItem={handleAddItem} />
+      <TravelLogo />
+      <TravelForm addItem={handleAddItem} />
       <PackingList
         items={packingItem}
         handleDeleteItem={handleDeleteItem}
         handleToggleCheck={handleToggleCheck}
       />
-      <Status items={packingItem} />
+      <PackingSummary items={packingItem} />
     </>
   );
 };

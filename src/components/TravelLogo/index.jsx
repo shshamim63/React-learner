@@ -15,7 +15,7 @@ themeHeader.typography.h2 = {
   },
 };
 
-const Logo = () => {
+const TravelLogo = () => {
   return (
     <Container>
       <ThemeProvider theme={themeHeader}>
@@ -35,4 +35,4 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+export default TravelLogo;

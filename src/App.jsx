@@ -1,17 +1,33 @@
 import { CssBaseline } from "@mui/material";
-import NavBar from "./components/navbar";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import NavBar from "./components/Navbar";
 import AppRouter from "./Router";
+
+const theme = createTheme();
+
+theme.typography.h4 = {
+  fontSize: "2rem",
+  lineHeight: "5.5rem",
+  "@media (min-width:600px)": {
+    fontSize: "2.5rem",
+  },
+  [theme.breakpoints.up("md")]: {
+    fontSize: "3rem",
+  },
+};
 
 function App() {
   return (
     <>
-      <CssBaseline />
-      <NavBar />
-      <main>
-        <div>
-          <AppRouter />
-        </div>
-      </main>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <NavBar />
+        <main>
+          <div>
+            <AppRouter />
+          </div>
+        </main>
+      </ThemeProvider>
     </>
   );
 }
