@@ -1,10 +1,21 @@
-import { Grid, TextField, Typography, Stack, Paper } from "@mui/material";
-import { customColor } from "../../style";
+import {
+  Grid,
+  TextField,
+  Typography,
+  Stack,
+  Paper,
+  InputLabel,
+  FormControl,
+  Select,
+  MenuItem,
+  Button,
+  Box,
+} from "@mui/material";
 
-const SplitBillForm = () => {
+const SplitBillForm = ({ contributors }) => {
   return (
     <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
-      <Paper elevation={4}>
+      <Paper elevation={4} sx={{ minHeight: 350 }}>
         <Typography variant="h5" textAlign="center" marginTop={1}>
           Split a bill X
         </Typography>
@@ -41,6 +52,25 @@ const SplitBillForm = () => {
                 defaultValue={0}
               />
             </Stack>
+            <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="bill-payer">Bill Payer</InputLabel>
+              <Select labelId="bill-payer" id="bill-payer" size="small">
+                {contributors.map((contributor) => (
+                  <MenuItem key={contributor.id} value={contributor.id}>
+                    {contributor.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <Box>
+              <Button
+                size="small"
+                variant="contained"
+                sx={{ display: "flex", float: "right" }}
+              >
+                Split Bill
+              </Button>
+            </Box>
           </Stack>
         </form>
       </Paper>

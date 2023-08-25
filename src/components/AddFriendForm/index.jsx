@@ -1,15 +1,23 @@
 import { Stack, TextField, Button, Box } from "@mui/material";
 import { useState } from "react";
 
-const AddFriendForm = () => {
+const AddFriendForm = ({ addFriend }) => {
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState("https://i.pravatar.cc/48");
 
   const submit = (e) => {
     e.preventDefault();
     if (!name && !image) return null;
+    const id = crypto.randomUUID();
+    const newFriend = {
+      name,
+      image: `${image}?u=${id}`,
+      balance: 0,
+      id,
+    };
+    addFriend(newFriend);
     setName("");
-    setImage("");
+    setImage("https://i.pravatar.cc/48");
   };
 
   return (

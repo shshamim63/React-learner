@@ -7,42 +7,32 @@ import { customColor } from "../../style";
 import Contributor from "../Contributor";
 import AddFriendForm from "../AddFriendForm";
 
-const friends = [
-  {
-    id: 118836,
-    name: "Clark",
-    image: "https://i.pravatar.cc/48?u=118836",
-    balance: -7,
-  },
-  {
-    id: 933372,
-    name: "Sarah",
-    image: "https://i.pravatar.cc/48?u=933372",
-    balance: 20,
-  },
-  {
-    id: 499476,
-    name: "Anthony",
-    image: "https://i.pravatar.cc/48?u=499476",
-    balance: 0,
-  },
-];
+const ContributorList = ({
+  contributors,
+  addContributors,
+  OnSelectFriend,
+  selectedFriend,
+}) => {
+  const [formVisibitity, setFormVisibility] = useState(false);
 
-const ContributorList = () => {
-  const [buttonVisibitity, setbuttonVisibility] = useState(true);
   return (
     <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
       <Paper variant="outlined" sx={{ padding: { lg: 10, md: 5 } }}>
         <List>
-          {friends && [
-            ...friends.map((friend) => (
-              <Contributor key={friend.id} user={friend}></Contributor>
+          {contributors && [
+            ...contributors.map((friend) => (
+              <Contributor
+                key={friend.id}
+                user={friend}
+                OnSelectFriend={OnSelectFriend}
+                selectedFriend={selectedFriend}
+              ></Contributor>
             )),
           ]}
         </List>
       </Paper>
       <Box marginTop={2}>
-        {!buttonVisibitity && <AddFriendForm />}
+        {formVisibitity && <AddFriendForm addFriend={addContributors} />}
         <Button
           size="medium"
           sx={{
@@ -52,9 +42,9 @@ const ContributorList = () => {
             color: customColor.grey.deep,
             backgroundColor: customColor.orange.deep,
           }}
-          onClick={(e) => setbuttonVisibility(!buttonVisibitity)}
+          onClick={(e) => setFormVisibility(!formVisibitity)}
         >
-          {buttonVisibitity ? "Add Friend" : "Close"}
+          {formVisibitity ? "Close" : "Add Friend"}
         </Button>
       </Box>
     </Grid>
