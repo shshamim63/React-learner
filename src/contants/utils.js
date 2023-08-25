@@ -1,1 +1,1 @@
-export const pages = ['Tracker', 'Travel', 'Expenses', 'Worldwide']
+export const pages = ["Tracker", "Travel", "Expenses", "Worldwide"];
