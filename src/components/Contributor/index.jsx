@@ -7,7 +7,17 @@ import {
   Button,
 } from "@mui/material";
 
-const Contributor = ({ user, OnSelectFriend, selectedFriend }) => {
+const Contributor = ({ user, handleOnSelectFriend, selectedFriend }) => {
+  let owingText = "";
+
+  if (user.balance < 0) {
+    owingText = `You owe ${user.name} ${user.balance}$`;
+  } else if (user.balance > 0) {
+    owingText = `${user.name} owe You ${user.balance}$`;
+  } else {
+    owingText = "You both are even";
+  }
+
   return (
     <ListItem
       alignItems="flex-start"
@@ -17,7 +27,7 @@ const Contributor = ({ user, OnSelectFriend, selectedFriend }) => {
           variant="contained"
           size="small"
           onClick={() => {
-            OnSelectFriend(user);
+            handleOnSelectFriend(user);
           }}
         >
           {selectedFriend && selectedFriend.id === user.id ? "Close" : "Select"}
@@ -38,7 +48,7 @@ const Contributor = ({ user, OnSelectFriend, selectedFriend }) => {
               variant="body2"
               color="text.primary"
             >
-              {user.name}
+              {owingText}
             </Typography>
           </>
         }

@@ -9,7 +9,6 @@ const Expenses = () => {
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   const handleOnSelectFriend = (friend) => {
-    console.log(selectedFriend && selectedFriend.id === friend.id);
     if (selectedFriend && selectedFriend.id === friend.id) {
       setSelectedFriend(null);
     } else {
@@ -21,15 +20,31 @@ const Expenses = () => {
     setContributors([...contributors, user]);
   };
 
+  const handleSplitBill = (value) => {
+    setContributors((contributors) =>
+      contributors.map((contributor) =>
+        contributor.id === selectedFriend.id
+          ? { ...contributor, balance: contributor.balance + value }
+          : contributor
+      )
+    );
+    setSelectedFriend(null);
+  };
   return (
     <Grid container justifyContent="space-around" marginTop={4}>
       <ContributorList
         contributors={contributors}
         addContributors={handleOnAddContributor}
-        OnSelectFriend={handleOnSelectFriend}
+        onSelectFriend={handleOnSelectFriend}
         selectedFriend={selectedFriend}
       />
-      {selectedFriend && <SplitBillForm contributors={contributors} />}
+      {selectedFriend && (
+        <SplitBillForm
+          contributors={contributors}
+          selectedFriend={selectedFriend}
+          onSplitBill={handleSplitBill}
+        />
+      )}
     </Grid>
   );
 };
