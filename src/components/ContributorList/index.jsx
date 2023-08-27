@@ -20,6 +20,11 @@ const ContributorList = ({
     onSelectFriend(frind);
   };
 
+  const handleOnSetFormVisibility = () => {
+    if (selectedFriend) return;
+    setFormVisibility(!formVisibitity);
+  };
+
   return (
     <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
       {contributors.length > 0 && (
@@ -39,7 +44,9 @@ const ContributorList = ({
         </Paper>
       )}
       <Box marginTop={2}>
-        {formVisibitity && <AddFriendForm addFriend={addContributors} />}
+        {!selectedFriend && formVisibitity && (
+          <AddFriendForm addFriend={addContributors} />
+        )}
         <Button
           size="medium"
           sx={{
@@ -49,7 +56,7 @@ const ContributorList = ({
             color: customColor.grey.deep,
             backgroundColor: customColor.orange.deep,
           }}
-          onClick={(e) => setFormVisibility(!formVisibitity)}
+          onClick={handleOnSetFormVisibility}
         >
           {formVisibitity ? "Close" : "Add Friend"}
         </Button>
