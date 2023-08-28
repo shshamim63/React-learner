@@ -5,36 +5,23 @@ import { Grid, List, Button, Box, Paper } from "@mui/material";
 import { customColor } from "../../style";
 
 import Contributor from "../Contributor";
-import AddFriendForm from "../AddFriendForm";
 
-const ContributorList = ({
-  contributors,
-  addContributors,
-  onSelectFriend,
-  selectedFriend,
-}) => {
-  const [formVisibitity, setFormVisibility] = useState(false);
-
+const ContributorList = ({ contributors, onSelectFriend, selectedFriend }) => {
   const handleOnSelectFriend = (frind) => {
-    setFormVisibility(false);
     onSelectFriend(frind);
   };
 
-  const handleOnSetFormVisibility = () => {
-    if (selectedFriend) return;
-    setFormVisibility(!formVisibitity);
-  };
-
   return (
-    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
+    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5} spacing={1}>
       {contributors.length > 0 && (
         <Paper variant="outlined" sx={{ padding: { lg: 10, md: 5 } }}>
-          <List>
+          <List sx={{ background: customColor.orange.light }}>
             {contributors && [
-              ...contributors.map((friend) => (
+              ...contributors.map((friend, index) => (
                 <Contributor
                   key={friend.id}
                   user={friend}
+                  index={index}
                   handleOnSelectFriend={handleOnSelectFriend}
                   selectedFriend={selectedFriend}
                 ></Contributor>
@@ -43,24 +30,6 @@ const ContributorList = ({
           </List>
         </Paper>
       )}
-      <Box marginTop={2}>
-        {!selectedFriend && formVisibitity && (
-          <AddFriendForm addFriend={addContributors} />
-        )}
-        <Button
-          size="medium"
-          sx={{
-            display: "flex",
-            float: "right",
-            marginTop: 2,
-            color: customColor.grey.deep,
-            backgroundColor: customColor.orange.deep,
-          }}
-          onClick={handleOnSetFormVisibility}
-        >
-          {formVisibitity ? "Close" : "Add Friend"}
-        </Button>
-      </Box>
     </Grid>
   );
 };

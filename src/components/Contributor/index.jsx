@@ -6,8 +6,9 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { customColor } from "../../style";
 
-const Contributor = ({ user, handleOnSelectFriend, selectedFriend }) => {
+const Contributor = ({ user, handleOnSelectFriend, selectedFriend, index }) => {
   let owingText = "";
 
   if (user.balance < 0) {
@@ -20,6 +21,12 @@ const Contributor = ({ user, handleOnSelectFriend, selectedFriend }) => {
 
   return (
     <ListItem
+      sx={{
+        background: customColor.red.light,
+        width: "95%",
+        margin: "auto",
+        ...(index > 0 && { marginTop: 1 }),
+      }}
       alignItems="flex-start"
       secondaryAction={
         <Button

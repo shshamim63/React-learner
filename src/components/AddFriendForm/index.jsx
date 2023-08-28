@@ -1,11 +1,24 @@
-import { Stack, TextField, Button, Box } from "@mui/material";
+import {
+  Stack,
+  TextField,
+  Button,
+  Box,
+  Modal,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
-const AddFriendForm = ({ addFriend }) => {
+import { modalContainerstyle } from "./style";
+
+const AddFriendForm = ({ addFriend, showForm, updateFormVisibility }) => {
   const [name, setName] = useState("");
   const [image, setImage] = useState("https://i.pravatar.cc/48");
 
-  const submit = (e) => {
+  const closeModal = () => {
+    updateFormVisibility(false);
+  };
+
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     if (!name && !image) return null;
     const id = crypto.randomUUID();
@@ -16,34 +29,32 @@ const AddFriendForm = ({ addFriend }) => {
       id,
     };
     addFriend(newFriend);
+    updateFormVisibility(false);
     setName("");
     setImage("https://i.pravatar.cc/48");
   };
 
   return (
-    <Box sx={{ padding: 3 }}>
-      <form onSubmit={submit}>
-        <Stack
-          spacing={2}
-          sx={{ minWidth: 350, maxWidth: 450, margin: "auto", background: "" }}
-        >
-          <TextField
-            value={name}
-            id="name"
-            label="Name"
-            size="small"
-            variant="outlined"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <TextField
-            value={image}
-            id="image-url"
-            label="Image"
-            size="small"
-            variant="outlined"
-            onChange={(e) => setImage(e.target.value)}
-          />
-          <Box>
+    <Modal open={showForm} onClose={closeModal}>
+      <Box sx={modalContainerstyle}>
+        <form onSubmit={handleOnSubmit}>
+          <Stack spacing={2}>
+            <TextField
+              value={name}
+              id="name"
+              label="Name"
+              size="small"
+              variant="outlined"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <TextField
+              value={image}
+              id="image-url"
+              label="Image"
+              size="small"
+              variant="outlined"
+              onChange={(e) => setImage(e.target.value)}
+            />
             <Button
               sx={{
                 width: 150,
@@ -57,10 +68,10 @@ const AddFriendForm = ({ addFriend }) => {
             >
               Add
             </Button>
-          </Box>
-        </Stack>
-      </form>
-    </Box>
+          </Stack>
+        </form>
+      </Box>
+    </Modal>
   );
 };
 
