@@ -25,6 +25,7 @@ const Contributor = ({ user, handleOnSelectFriend, selectedFriend, index }) => {
         background: customColor.red.light,
         width: "95%",
         margin: "auto",
+        borderRadius: 5,
         ...(index > 0 && { marginTop: 1 }),
       }}
       alignItems="flex-start"
@@ -42,7 +43,7 @@ const Contributor = ({ user, handleOnSelectFriend, selectedFriend, index }) => {
       }
       disablePadding
     >
-      <ListItemAvatar>
+      <ListItemAvatar sx={{ marginLeft: 1 }}>
         <Avatar alt={user.name} src={user.image} />
       </ListItemAvatar>
       <ListItemText

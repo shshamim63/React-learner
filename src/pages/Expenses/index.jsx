@@ -58,9 +58,9 @@ const Expenses = () => {
               margin: "auto",
               color: customColor.grey.deep,
               backgroundColor: customColor.orange.deep,
-              width: 80,
-              height: 30,
-              fontSize: 10,
+              width: { sm: 80, md: 100, lg: 120 },
+              height: { sm: 30, md: 35, lg: 40 },
+              fontSize: { sm: 10, md: 12, lg: 14 },
               fontWeight: 800,
             }}
             onClick={(e) => updateFormVisibility(true)}

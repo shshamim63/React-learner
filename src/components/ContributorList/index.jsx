@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { Grid, List, Button, Box, Paper } from "@mui/material";
+import { Grid, List, Paper } from "@mui/material";
 
 import { customColor } from "../../style";
 
@@ -12,9 +10,14 @@ const ContributorList = ({ contributors, onSelectFriend, selectedFriend }) => {
   };
 
   return (
-    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5} spacing={1}>
+    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
       {contributors.length > 0 && (
-        <Paper variant="outlined" sx={{ padding: { lg: 10, md: 5 } }}>
+        <Paper
+          variant="outlined"
+          sx={{
+            padding: { lg: 5, md: 5, background: customColor.blue.light },
+          }}
+        >
           <List sx={{ background: customColor.orange.light }}>
             {contributors && [
               ...contributors.map((friend, index) => (

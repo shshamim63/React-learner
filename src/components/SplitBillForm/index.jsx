@@ -9,9 +9,9 @@ import {
   Select,
   MenuItem,
   Button,
-  Box,
 } from "@mui/material";
 import { useState } from "react";
+import { customColor } from "../../style";
 
 const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
   const [bill, setBill] = useState("");
@@ -24,24 +24,50 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(bill, paidByUser);
     if (!bill || !paidByUser) return;
     onSplitBill(whoIsPaying === "user" ? paidByFriend : paidByUser * -1);
   };
 
   return (
-    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
-      <Paper elevation={4} sx={{ minHeight: 350 }}>
-        <Typography variant="h5" textAlign="center" marginTop={1}>
-          {`Split a bill with ${selectedFriend.name}`}
+    <Grid
+      item
+      xs={8}
+      sm={5}
+      md={5}
+      lg={5}
+      sx={{ background: customColor.blue.light }}
+    >
+      <Paper elevation={4} sx={{ background: customColor.amber.light }}>
+        <Typography
+          variant="h6"
+          textAlign="center"
+          minHeight={40}
+          lineHeight={2}
+          sx={{
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".1rem",
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
+          Split a bill with{" "}
+          <Typography variant="outlined" color={customColor.orange.deep}>
+            {selectedFriend.name}
+          </Typography>
         </Typography>
+      </Paper>
+      <Paper
+        elevation={4}
+        sx={{ background: customColor.amber.light, margin: 1, padding: 1 }}
+      >
         <form onSubmit={handleSubmit}>
           <Stack
-            spacing={2}
+            spacing={1}
             sx={{
               minWidth: 350,
-              maxWidth: 450,
-              margin: "auto",
-              background: "",
+              minHeight: 220,
             }}
           >
             <TextField
@@ -50,6 +76,7 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
               size="small"
               variant="outlined"
               value={bill}
+              sx={{ marginTop: 1 }}
               onChange={(e) =>
                 setBill(Number(e.target.value) ? Number(e.target.value) : "")
               }
@@ -89,26 +116,33 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
                 labelId="bill-payer"
                 id="bill-payer"
                 size="small"
+                value={whoIsPaying}
                 onChange={(e) => setWhoIsPaying(e.target.value)}
               >
-                {currentContributors.map((contributor) => (
+                {currentContributors.map((contributor, index) => (
                   <MenuItem key={contributor} value={contributor}>
                     {contributor}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-            <Box>
-              <Button
-                type="submit"
-                size="small"
-                variant="contained"
-                sx={{ display: "flex", float: "right" }}
-              >
-                Split Bill
-              </Button>
-            </Box>
           </Stack>
+          <Grid container justifyContent="flex-end">
+            <Button
+              type="submit"
+              sx={{
+                color: customColor.amber.deep,
+                backgroundColor: customColor.blue.secondary,
+                width: { sm: 80, md: 100, lg: 120 },
+                height: { sm: 30, md: 35, lg: 40 },
+                fontSize: { sm: 10, md: 12, lg: 14 },
+                fontWeight: 800,
+              }}
+              variant="contained"
+            >
+              Split Bill
+            </Button>
+          </Grid>
         </form>
       </Paper>
     </Grid>
