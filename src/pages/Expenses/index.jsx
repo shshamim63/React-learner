@@ -77,7 +77,7 @@ const Expenses = () => {
           updateFormVisibility={updateFormVisibility}
         />
       }
-      <Grid container justifyContent="space-around" marginTop={4}>
+      <Grid container justifyContent="space-evenly" marginTop={4}>
         <ContributorList
           contributors={contributors}
           addContributors={handleOnAddContributor}

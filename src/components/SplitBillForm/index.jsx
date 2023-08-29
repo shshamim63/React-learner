@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { customColor } from "../../style";
 
-const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
+const SplitBillForm = ({ selectedFriend, onSplitBill }) => {
   const [bill, setBill] = useState("");
   const [paidByUser, setPaidByUser] = useState("");
   const paidByFriend = bill ? bill - paidByUser : "";
@@ -24,7 +24,6 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(bill, paidByUser);
     if (!bill || !paidByUser) return;
     onSplitBill(whoIsPaying === "user" ? paidByFriend : paidByUser * -1);
   };
@@ -32,13 +31,17 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
   return (
     <Grid
       item
+      minWidth={400}
+      marginTop={{ xs: 1, sm: 1, md: 0 }}
       xs={8}
-      sm={5}
+      sm={8}
       md={5}
-      lg={5}
-      sx={{ background: customColor.blue.light }}
+      sx={{ background: customColor.blue.light, borderRadius: 1 }}
     >
-      <Paper elevation={4} sx={{ background: customColor.amber.light }}>
+      <Paper
+        elevation={4}
+        sx={{ background: customColor.amber.light, margin: 1, borderRadius: 2 }}
+      >
         <Typography
           variant="h6"
           textAlign="center"
@@ -60,14 +63,19 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
       </Paper>
       <Paper
         elevation={4}
-        sx={{ background: customColor.amber.light, margin: 1, padding: 1 }}
+        sx={{
+          background: customColor.amber.light,
+          margin: 1,
+          padding: 1,
+          borderRadius: 2,
+        }}
       >
         <form onSubmit={handleSubmit}>
           <Stack
             spacing={1}
             sx={{
               minWidth: 350,
-              minHeight: 220,
+              minHeight: { xs: 260, sm: 220, md: 260, lg: 240 },
             }}
           >
             <TextField
@@ -131,12 +139,13 @@ const SplitBillForm = ({ contributors, selectedFriend, onSplitBill }) => {
             <Button
               type="submit"
               sx={{
-                color: customColor.amber.deep,
+                color: customColor.grey.deep,
                 backgroundColor: customColor.blue.secondary,
-                width: { sm: 80, md: 100, lg: 120 },
-                height: { sm: 30, md: 35, lg: 40 },
-                fontSize: { sm: 10, md: 12, lg: 14 },
+                width: { xs: 100, sm: 100, md: 110, lg: 120 },
+                height: { xs: 30, sm: 30, md: 35, lg: 40 },
+                fontSize: { xs: 10, sm: 10, md: 12, lg: 14 },
                 fontWeight: 800,
+                marginBottom: { xs: 1.5, sm: 2, md: 2 },
               }}
               variant="contained"
             >

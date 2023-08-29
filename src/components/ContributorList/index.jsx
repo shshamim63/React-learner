@@ -10,7 +10,7 @@ const ContributorList = ({ contributors, onSelectFriend, selectedFriend }) => {
   };
 
   return (
-    <Grid item minWidth={400} xs={8} sm={5} md={5} lg={5}>
+    <Grid item minWidth={400} xs={8} sm={8} md={5}>
       {contributors.length > 0 && (
         <Paper
           variant="outlined"
