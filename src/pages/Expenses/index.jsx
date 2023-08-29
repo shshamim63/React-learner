@@ -12,6 +12,7 @@ const Expenses = () => {
   const [showForm, setshowForm] = useState(false);
 
   const updateFormVisibility = (status) => {
+    if (selectedFriend) return;
     setshowForm(status);
   };
 

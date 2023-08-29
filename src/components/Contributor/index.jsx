@@ -12,9 +12,9 @@ const Contributor = ({ user, handleOnSelectFriend, selectedFriend, index }) => {
   let owingText = "";
 
   if (user.balance < 0) {
-    owingText = `You owe ${user.name} ${user.balance}$`;
+    owingText = `You owe ${user.name} ${Math.abs(user.balance)}$`;
   } else if (user.balance > 0) {
-    owingText = `${user.name} owe You ${user.balance}$`;
+    owingText = `${user.name} owe You ${Math.abs(user.balance)}$`;
   } else {
     owingText = "You both are even";
   }
