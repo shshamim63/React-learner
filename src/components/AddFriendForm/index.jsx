@@ -4,7 +4,6 @@ import {
   Button,
   Box,
   Modal,
-  Typography,
 } from "@mui/material";
 import { useState } from "react";
 
