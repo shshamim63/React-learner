@@ -1,6 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import NavBar from "./components/Navbar";
+import NavBarMain from "./components/NavbarMain";
 import AppRouter from "./Router";
 
 const theme = createTheme();
@@ -21,7 +21,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar />
+        <NavBarMain />
         <main>
           <div>
             <AppRouter />

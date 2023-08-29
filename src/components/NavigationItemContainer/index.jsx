@@ -13,6 +13,7 @@ import StairsIcon from "@mui/icons-material/Stairs";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import SafetyDividerIcon from "@mui/icons-material/SafetyDivider";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
 
 import { pages } from "../../contants/utils";
 
@@ -26,6 +27,8 @@ const pageIcon = (page) => {
       return <SafetyDividerIcon />;
     case "Worldwide":
       return <TravelExploreIcon />;
+    case "UsePopcorn":
+      return <LiveTvIcon />;
     default:
   }
 };

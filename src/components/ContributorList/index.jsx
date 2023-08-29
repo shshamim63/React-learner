@@ -32,7 +32,7 @@ const ContributorList = ({ contributors, onSelectFriend, selectedFriend }) => {
               textAlign="center"
               sx={{
                 background: customColor.orange.light,
-                marginBottom: 1,
+                mb: 1,
                 borderRadius: 1,
                 border: "0.7px dotted",
               }}

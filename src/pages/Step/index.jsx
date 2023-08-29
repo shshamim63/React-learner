@@ -147,9 +147,7 @@ export const Step = () => {
                 </>
               )}
               {!isOpen && (
-                <Box
-                  sx={{ width: 250, height: 150, margin: "auto", marginTop: 2 }}
-                >
+                <Box sx={{ width: 250, height: 150, margin: "auto", mt: 2 }}>
                   <Stack
                     useFlexGap
                     flexWrap="wrap"

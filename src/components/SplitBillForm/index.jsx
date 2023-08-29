@@ -84,7 +84,7 @@ const SplitBillForm = ({ selectedFriend, onSplitBill }) => {
               size="small"
               variant="outlined"
               value={bill}
-              sx={{ marginTop: 1 }}
+              sx={{ mr: 1 }}
               onChange={(e) =>
                 setBill(Number(e.target.value) ? Number(e.target.value) : "")
               }
@@ -145,7 +145,7 @@ const SplitBillForm = ({ selectedFriend, onSplitBill }) => {
                 height: { xs: 30, sm: 30, md: 35, lg: 40 },
                 fontSize: { xs: 10, sm: 10, md: 12, lg: 14 },
                 fontWeight: 800,
-                marginBottom: { xs: 1.5, sm: 2, md: 2 },
+                mb: { xs: 1.5, sm: 2, md: 2 },
               }}
               variant="contained"
             >

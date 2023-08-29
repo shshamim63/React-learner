@@ -46,7 +46,7 @@ const Expenses = () => {
           maxWidth: "sm",
           margin: "auto",
           height: 100,
-          marginTop: 4,
+          mt: 4,
           background: customColor.amber.light,
         }}
       >

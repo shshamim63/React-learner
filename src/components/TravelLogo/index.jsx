@@ -25,7 +25,7 @@ const TravelLogo = () => {
             backgroundColor: "wheat",
             height: 85,
             textAlign: "center",
-            marginTop: 2,
+            mt: 2,
           }}
         >
           🌴 Far Away 🧳

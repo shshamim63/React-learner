@@ -1,7 +1,7 @@
 import { AppBar, Container, Toolbar, Typography, Box } from "@mui/material";
 import NavigationDrawer from "../NavigationDrawer";
 
-const NavBar = () => {
+const NavBarMain = () => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -30,4 +30,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarMain;
