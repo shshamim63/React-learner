@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 const PackingSummary = ({ items }) => {
   const numItems = items.length;
+
   if (!numItems) {
     return (
       <Box
