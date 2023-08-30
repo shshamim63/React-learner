@@ -1,3 +1,5 @@
+import { customColor } from "../../style";
+
 import {
   Avatar,
   ListItem,
@@ -6,7 +8,6 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { customColor } from "../../style";
 
 const Contributor = ({ user, handleOnSelectFriend, selectedFriend, index }) => {
   let owingText = "";
