@@ -2,6 +2,7 @@ import { Grid, Box, Typography } from "@mui/material";
 
 import NavbarMovie from "../../components/NavbarMovie";
 import MovieList from "../../components/MovieList";
+import StarRating from "../../components/StarRating";
 
 const UsePopcorn = () => {
   return (
@@ -27,6 +28,7 @@ const UsePopcorn = () => {
           <Typography>Watched Movie List</Typography>
         </MovieList>
       </Grid>
+      <StarRating maxRating={10} size="small" />
     </Box>
   );
 };
