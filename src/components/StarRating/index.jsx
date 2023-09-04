@@ -2,10 +2,9 @@ import { Stack, IconButton, Typography } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import { useState } from "react";
-import { Height } from "@mui/icons-material";
 
-const StarRating = ({ maxRating = 5, size = "small" }) => {
-  const [rating, setRating] = useState(0);
+const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
+  const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   const handleRating = (rating) => {
@@ -49,7 +48,12 @@ const StarRating = ({ maxRating = 5, size = "small" }) => {
       })}
       <Typography
         variant="subtitle2"
-        sx={{ height: "30px", lineHeight: 2.7, marginLeft: 1 }}
+        sx={{
+          height: "30px",
+          lineHeight: 2.7,
+          marginLeft: 1,
+          fontWeight: "bold",
+        }}
       >
         {tempRating ? tempRating : rating}
       </Typography>

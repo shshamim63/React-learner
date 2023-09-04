@@ -4,6 +4,7 @@ import Step from "./pages/Step";
 import Travel from "./pages/Travel";
 import Expenses from "./pages/Expenses";
 import UsePopcorn from "./pages/UsePopcorn";
+import HowReactWorks from "./pages/HowReactWorks";
 
 const AppRouter = () => {
   return (
@@ -13,6 +14,7 @@ const AppRouter = () => {
       <Route path="travel" element={<Travel />} />
       <Route path="expenses" element={<Expenses />} />
       <Route path="usepopcorn" element={<UsePopcorn />} />
+      <Route path="howreactworks" element={<HowReactWorks />} />
     </Routes>
   );
 };
