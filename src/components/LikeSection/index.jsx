@@ -1,15 +1,7 @@
-import { useState } from "react";
-import { Button, IconButton, Stack, Typography } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Button, Stack, Typography } from "@mui/material";
 import { customColor } from "../../style";
 
-const LikeSection = () => {
-  const [totlaLikes, setTotalLikes] = useState(0);
-
-  const handleAddLike = (likes) => {
-    setTotalLikes(totlaLikes + likes);
-  };
-
+const LikeSection = ({ totlaLikes, handleAddLike }) => {
   return (
     <Stack direction="row" spacing={1}>
       <Typography variant="subtitle2" sx={{ lineHeight: 2 }}>

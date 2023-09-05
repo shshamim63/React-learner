@@ -1,7 +1,7 @@
 import { Tabs, Tab, Paper } from "@mui/material";
 import { useState } from "react";
 
-import TabContext from "../TabContext";
+import TabContent from "../TabContent";
 
 const Tabbed = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -27,7 +27,7 @@ const Tabbed = ({ tabs }) => {
             ></Tab>
           ))}
       </Tabs>
-      <TabContext content={tabs[activeTab].context} key={activeTab} />
+      <TabContent content={tabs[activeTab].context} key={activeTab} />
     </Paper>
   );
 };
