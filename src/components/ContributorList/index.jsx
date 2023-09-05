@@ -31,13 +31,17 @@ const ContributorList = ({ contributors, onSelectFriend, selectedFriend }) => {
               variant="subtitle2"
               textAlign="center"
               sx={{
+                fontFamily: "monospace",
                 background: customColor.orange.light,
                 mb: 1,
                 borderRadius: 1,
                 border: "0.7px dotted",
+                height: 35,
+                fontSize: 20,
+                fontWeight: 900,
               }}
             >
-              Friend List
+              Friends
             </Typography>
             <List sx={{ background: customColor.orange.light }}>
               {contributors && [

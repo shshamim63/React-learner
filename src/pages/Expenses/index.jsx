@@ -90,6 +90,7 @@ const Expenses = () => {
             contributors={contributors}
             selectedFriend={selectedFriend}
             onSplitBill={handleSplitBill}
+            key={selectedFriend.id}
           />
         )}
       </Grid>
