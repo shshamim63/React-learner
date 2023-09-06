@@ -1,10 +1,12 @@
 import { InputBase, IconButton, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SearchBar = () => {
-  const handleOnChange = () => {
-    console.log("I am chaning");
+const SearchBar = ({ query, setQuery }) => {
+  const handleOnChange = (e) => {
+    setQuery(e.target.value);
   };
+
+  
 
   return (
     <Stack direction="row">
@@ -13,6 +15,7 @@ const SearchBar = () => {
         placeholder="Search Movies"
         inputProps={{ "aria-label": "search google maps" }}
         onChange={handleOnChange}
+        value={query}
       />
       <IconButton type="button" aria-label="search">
         <SearchIcon />

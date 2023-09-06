@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Grid, Box } from "@mui/material";
 
@@ -7,45 +7,23 @@ import MovieListContainer from "../../components/MovieListContainer";
 import StarRating from "../../components/StarRating";
 import MovieList from "../../components/MovieList";
 import WatchedMovieList from "../../components/WatchedMovieList";
+import SearchBar from "../../components/SearchBar";
 
-const moviesList = [
-  {
-    name: "Interesteller",
-    year: 201,
-    rating: 8.8,
-    userRating: 0,
-    image:
-      "https://media.npr.org/assets/img/2014/11/13/fl-17895r_wide-d745edc663a75ddc961f66684631a621dc148566.jpg",
-  },
-  {
-    name: "Interesteller",
-    year: 201,
-    rating: 8.8,
-    userRating: 0,
-    image:
-      "https://media.npr.org/assets/img/2014/11/13/fl-17895r_wide-d745edc663a75ddc961f66684631a621dc148566.jpg",
-  },
-  {
-    name: "Interesteller",
-    year: 201,
-    rating: 8.8,
-    userRating: 0,
-    image:
-      "https://media.npr.org/assets/img/2014/11/13/fl-17895r_wide-d745edc663a75ddc961f66684631a621dc148566.jpg",
-  },
-  {
-    name: "Interesteller",
-    year: 201,
-    rating: 8.8,
-    userRating: 0,
-    image:
-      "https://media.npr.org/assets/img/2014/11/13/fl-17895r_wide-d745edc663a75ddc961f66684631a621dc148566.jpg",
-  },
-];
+import { fetchMovies } from "../../api/movie";
 
 const UsePopcorn = () => {
-  const [movies, setMovies] = useState(moviesList);
+  const [movies, setMovies] = useState([]);
   const [moviesWatched, setMoviesWatched] = useState([]);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const getMovies = async () => {
+      const searchResult = await fetchMovies("hello");
+      setMovies(searchResult);
+    };
+    getMovies();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -55,12 +33,15 @@ const UsePopcorn = () => {
         mt: 2,
       }}
     >
-      <NavbarMovie />
+      <NavbarMovie>
+        <SearchBar query={query} setQuery={setQuery} />
+      </NavbarMovie>
       <Grid
         container
         direction={{ xs: "column", sm: "column", md: "row" }}
-        sx={{ height: { md: "80vh", lg: "80vh" } }}
         justifyContent="space-around"
+        minHeight={700}
+        maxHeight={700}
       >
         <MovieListContainer>
           <MovieList movies={movies}>Movie List</MovieList>

@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import BentoIcon from "@mui/icons-material/Bento";
 
-import SearchBar from "../SearchBar";
-
-const NavbarMovie = () => {
+const NavbarMovie = ({ children }) => {
   return (
     <AppBar position="static" sx={{ background: customColor.amber.deep }}>
       <Toolbar>
@@ -44,7 +42,7 @@ const NavbarMovie = () => {
             borderRadius: 2,
           }}
         >
-          <SearchBar />
+          {children}
         </Box>
       </Toolbar>
     </AppBar>
