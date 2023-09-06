@@ -8,6 +8,8 @@ import StarRating from "../../components/StarRating";
 import MovieList from "../../components/MovieList";
 import WatchedMovieList from "../../components/WatchedMovieList";
 import SearchBar from "../../components/SearchBar";
+import MovieError from "../../components/MovieError";
+import Loader from "../../components/Loader";
 
 import { fetchMovies } from "../../api/movie";
 
@@ -15,11 +17,20 @@ const UsePopcorn = () => {
   const [movies, setMovies] = useState([]);
   const [moviesWatched, setMoviesWatched] = useState([]);
   const [query, setQuery] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getMovies = async () => {
-      const searchResult = await fetchMovies("hello");
-      setMovies(searchResult);
+      try {
+        setIsLoading(true);
+        const searchResult = await fetchMovies("hello");
+        if (!searchResult.length) throw new Error("Movie Not found");
+        setMovies(searchResult);
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
     };
     getMovies();
   }, []);
@@ -44,7 +55,13 @@ const UsePopcorn = () => {
         maxHeight={700}
       >
         <MovieListContainer>
-          <MovieList movies={movies}>Movie List</MovieList>
+          <>
+            {isLoading && <Loader />}
+            {error && <MovieError message={error} />}
+            {!isLoading && !error && (
+              <MovieList movies={movies}>Movie List</MovieList>
+            )}
+          </>
         </MovieListContainer>
         <MovieListContainer>
           <WatchedMovieList moviesWatched={moviesWatched}>
