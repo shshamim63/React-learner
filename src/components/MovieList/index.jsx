@@ -6,15 +6,15 @@ const MovieList = ({ movies }) => {
   return (
     <List
       sx={{
-        width: "100%",
-        bgcolor: "background.paper",
-        height: 663.5,
+        width: "95%",
+        margin: "auto",
+        height: "95%",
         position: "relative",
         overflow: "auto",
       }}
     >
       {movies.map((movie) => (
-        <Movie movie={movie} key={movie.Title}></Movie>
+        <Movie movie={movie} key={movie.imdbID}></Movie>
       ))}
     </List>
   );

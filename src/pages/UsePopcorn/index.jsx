@@ -12,6 +12,7 @@ import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
 
 import { fetchMovies } from "../../api/movie";
+import { customColor } from "../../style";
 
 const UsePopcorn = () => {
   const [movies, setMovies] = useState([]);
@@ -24,7 +25,7 @@ const UsePopcorn = () => {
     const getMovies = async () => {
       try {
         setIsLoading(true);
-        const searchResult = await fetchMovies("hello");
+        const searchResult = await fetchMovies(query);
         if (!searchResult.length) throw new Error("Movie Not found");
         setMovies(searchResult);
       } catch (error) {
@@ -32,8 +33,15 @@ const UsePopcorn = () => {
       }
       setIsLoading(false);
     };
+
+    if (query.length < 3) {
+      setMovies([]);
+      setError("");
+      return;
+    }
+
     getMovies();
-  }, []);
+  }, [query]);
 
   return (
     <Box
@@ -51,8 +59,7 @@ const UsePopcorn = () => {
         container
         direction={{ xs: "column", sm: "column", md: "row" }}
         justifyContent="space-around"
-        minHeight={700}
-        maxHeight={700}
+        sx={{ background: customColor.grey.secondary }}
       >
         <MovieListContainer>
           <>

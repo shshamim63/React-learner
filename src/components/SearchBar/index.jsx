@@ -6,8 +6,6 @@ const SearchBar = ({ query, setQuery }) => {
     setQuery(e.target.value);
   };
 
-  
-
   return (
     <Stack direction="row">
       <InputBase
@@ -15,7 +13,6 @@ const SearchBar = ({ query, setQuery }) => {
         placeholder="Search Movies"
         inputProps={{ "aria-label": "search google maps" }}
         onChange={handleOnChange}
-        value={query}
       />
       <IconButton type="button" aria-label="search">
         <SearchIcon />

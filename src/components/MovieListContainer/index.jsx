@@ -21,14 +21,17 @@ const MovieListContainer = ({ children }) => {
       xl={5.6}
       sx={{
         mt: { xs: 1 },
-        background: customColor.grey.primary,
         borderRadius: 2,
+        width: "100%",
+        height: "700px",
+        mb: 2,
+        background: customColor.indigo.light,
       }}
     >
       <IconButton
         aria-label="delete"
         size="small"
-        sx={{ position: "relative", float: "right", zIndex: 10 }}
+        sx={{ position: "relative", float: "right", zIndex: 10, mr: 1, mt: 1 }}
         onClick={toggleHideList}
       >
         {hideList && <AddCircleOutlineIcon fontSize="inherit" />}
