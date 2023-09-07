@@ -13,8 +13,8 @@ const Movie = ({ movie }) => {
     >
       <ListItemAvatar>
         <img
-          style={{ height: "60px" }}
-          src={movie.Poster}
+          style={{ height: "60px", width: "40px" }}
+          src={movie.Poster !== "N/A" ? movie.Poster : "./no-image.avif"}
           alt={movie.Title}
           loading="lazy"
         />
