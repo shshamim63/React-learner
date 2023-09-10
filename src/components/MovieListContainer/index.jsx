@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Box, Grid, IconButton, Paper } from "@mui/material";
+import { Grid, IconButton, Paper } from "@mui/material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -14,19 +14,29 @@ const MovieListContainer = ({ children }) => {
   };
 
   return (
-    <Grid item xs={10} sm={10} md={6}>
-      <Paper sx={{ height: 700, background: customColor.blue.light }}>
-        <IconButton
-          aria-label="delete"
-          size="small"
-          onClick={toggleHideList}
-          sx={{ display: "relative", float: "right" }}
-        >
-          {hideList && <AddCircleOutlineIcon fontSize="inherit" />}
-          {!hideList && <RemoveCircleOutlineIcon fontSize="inherit" />}
-        </IconButton>
-        {!hideList && children}
-      </Paper>
+    <Grid
+      item
+      xs={10}
+      sm={10}
+      md={5.85}
+      sx={{
+        minHeight: 700,
+        maxHeight: 700,
+        width: "100%",
+        background: customColor.grey.secondary,
+        position: "relative",
+      }}
+    >
+      <IconButton
+        aria-label="delete"
+        size="small"
+        onClick={toggleHideList}
+        sx={{ position: "absolute", right: 0, top: 0, zIndex: 100 }}
+      >
+        {hideList && <AddCircleOutlineIcon fontSize="inherit" />}
+        {!hideList && <RemoveCircleOutlineIcon fontSize="inherit" />}
+      </IconButton>
+      {!hideList && children}
     </Grid>
   );
 };

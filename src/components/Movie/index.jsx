@@ -12,14 +12,17 @@ const Movie = ({ movie, handleSelectMovie }) => {
       spacing={2}
       onClick={handleSelect}
       sx={{
-        background: customColor.grey.secondary,
-        m: 1,
+        background: customColor.amber.light,
+        m: 0.2,
+        borderRadius: 2,
+        border: `1px solid ${customColor.orange.secondary}`,
       }}
+      alignItems="stretch"
     >
       <img
         src={movie.Poster !== "N/A" ? movie.Poster : "./no-image.avif"}
         alt={movie.Title}
-        style={{ height: "100px", width: "60px" }}
+        style={{ height: "100px", width: "65px" }}
       />
       <Stack spacing={0.5}>
         <Typography

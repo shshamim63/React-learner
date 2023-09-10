@@ -4,16 +4,13 @@ import { Grid, Box } from "@mui/material";
 
 import NavbarMovie from "../../components/NavbarMovie";
 import MovieListContainer from "../../components/MovieListContainer";
-import StarRating from "../../components/StarRating";
 import MovieList from "../../components/MovieList";
 import WatchedMovieList from "../../components/WatchedMovieList";
 import SearchBar from "../../components/SearchBar";
 import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
-import SelectedMovie from "../../components/SelectedMovie";
 
 import { fetchMovies } from "../../api/movie";
-import { customColor } from "../../style";
 
 const UsePopcorn = () => {
   const [movies, setMovies] = useState([]);
@@ -22,6 +19,10 @@ const UsePopcorn = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
+
+  const handleOnUpdateWatchedMovieList = (movie) => {
+    setMoviesWatched([...moviesWatched, movie]);
+  };
 
   useEffect(() => {
     const getMovies = async () => {
@@ -48,7 +49,6 @@ const UsePopcorn = () => {
   return (
     <Box
       sx={{
-        flexGrow: 1,
         maxWidth: { sm: "sm", md: "md", lg: "lg" },
         margin: "auto",
         mt: 2,
@@ -58,10 +58,14 @@ const UsePopcorn = () => {
         <SearchBar query={query} setQuery={setQuery} />
       </NavbarMovie>
       <Box sx={{ width: "100%" }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        <Grid container justifyContent="space-evenly">
           <MovieListContainer>
             <>
-              {isLoading && <Loader />}
+              {isLoading && (
+                <Box sx={{ position: "relative", top: 155 }}>
+                  <Loader></Loader>
+                </Box>
+              )}
               {error && <MovieError message={error} />}
               {!isLoading && !error && (
                 <MovieList
@@ -74,17 +78,14 @@ const UsePopcorn = () => {
             </>
           </MovieListContainer>
           <MovieListContainer>
-            {selectedMovieId && (
-              <SelectedMovie movieId={selectedMovieId}></SelectedMovie>
-            )}
-            {!selectedMovieId && (
-              <WatchedMovieList moviesWatched={moviesWatched}>
-                Watched Movie List
-              </WatchedMovieList>
-            )}
+            <WatchedMovieList
+              moviesWatched={moviesWatched}
+              movieId={selectedMovieId}
+              handleOnUpdateWatchedMovieList={handleOnUpdateWatchedMovieList}
+              setSelectedMovieId={setSelectedMovieId}
+            />
           </MovieListContainer>
         </Grid>
-        <StarRating maxRating={10} size="small" defaultRating={6} />
       </Box>
     </Box>
   );

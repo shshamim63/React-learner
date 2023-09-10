@@ -1,14 +1,17 @@
 import { Stack } from "@mui/material";
 
 import Movie from "../Movie";
+
 const MovieList = ({ movies, handleSelectMovie }) => {
   return (
     <Stack
       sx={{
-        mt: 1,
-        height: "96%",
+        height: "95%",
+        width: "95%",
+        margin: "auto",
         overflow: "auto",
-        width: "100%",
+        marginTop: 3.5,
+        padding: 1,
       }}
     >
       {movies.map((movie) => (
