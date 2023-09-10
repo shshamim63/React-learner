@@ -1,22 +1,24 @@
-import { List } from "@mui/material";
+import { Stack } from "@mui/material";
 
 import Movie from "../Movie";
-
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, handleSelectMovie }) => {
   return (
-    <List
+    <Stack
       sx={{
-        width: "95%",
-        margin: "auto",
-        height: "95%",
-        position: "relative",
+        mt: 1,
+        height: "96%",
         overflow: "auto",
+        width: "100%",
       }}
     >
       {movies.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID}></Movie>
+        <Movie
+          movie={movie}
+          key={movie.imdbID}
+          handleSelectMovie={handleSelectMovie}
+        ></Movie>
       ))}
-    </List>
+    </Stack>
   );
 };
 

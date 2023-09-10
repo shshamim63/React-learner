@@ -12,3 +12,15 @@ export const fetchMovies = async (query) => {
     throw new Error("Oops..Something went wrong, please refresh");
   }
 };
+
+export const getMovieDetails = async (imdbId) => {
+  try {
+    const response = await axios.get(
+      `https://www.omdbapi.com/?i=${imdbId}&apikey=${apiKey}`
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error("Oops..Something went wrong, please refresh");
+  }
+};

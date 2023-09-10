@@ -10,6 +10,7 @@ import WatchedMovieList from "../../components/WatchedMovieList";
 import SearchBar from "../../components/SearchBar";
 import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
+import SelectedMovie from "../../components/SelectedMovie";
 
 import { fetchMovies } from "../../api/movie";
 import { customColor } from "../../style";
@@ -20,6 +21,7 @@ const UsePopcorn = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -55,28 +57,35 @@ const UsePopcorn = () => {
       <NavbarMovie>
         <SearchBar query={query} setQuery={setQuery} />
       </NavbarMovie>
-      <Grid
-        container
-        direction={{ xs: "column", sm: "column", md: "row" }}
-        justifyContent="space-around"
-        sx={{ background: customColor.grey.secondary }}
-      >
-        <MovieListContainer>
-          <>
-            {isLoading && <Loader />}
-            {error && <MovieError message={error} />}
-            {!isLoading && !error && (
-              <MovieList movies={movies}>Movie List</MovieList>
+      <Box sx={{ width: "100%" }}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <MovieListContainer>
+            <>
+              {isLoading && <Loader />}
+              {error && <MovieError message={error} />}
+              {!isLoading && !error && (
+                <MovieList
+                  movies={movies}
+                  handleSelectMovie={setSelectedMovieId}
+                >
+                  Movie List
+                </MovieList>
+              )}
+            </>
+          </MovieListContainer>
+          <MovieListContainer>
+            {selectedMovieId && (
+              <SelectedMovie movieId={selectedMovieId}></SelectedMovie>
             )}
-          </>
-        </MovieListContainer>
-        <MovieListContainer>
-          <WatchedMovieList moviesWatched={moviesWatched}>
-            Watched Movie List
-          </WatchedMovieList>
-        </MovieListContainer>
-      </Grid>
-      <StarRating maxRating={10} size="small" defaultRating={6} />
+            {!selectedMovieId && (
+              <WatchedMovieList moviesWatched={moviesWatched}>
+                Watched Movie List
+              </WatchedMovieList>
+            )}
+          </MovieListContainer>
+        </Grid>
+        <StarRating maxRating={10} size="small" defaultRating={6} />
+      </Box>
     </Box>
   );
 };
