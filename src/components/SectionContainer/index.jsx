@@ -25,6 +25,7 @@ const SectionContainer = ({ children }) => {
         width: "100%",
         background: customColor.grey.fade,
         position: "relative",
+        border: `2px solid ${customColor.amber.fade}`,
       }}
     >
       <IconButton

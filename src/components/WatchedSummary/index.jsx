@@ -5,15 +5,18 @@ import { customColor } from "../../style";
 
 const WatchedSummary = ({ watched }) => {
   const numberOfWatchedMovies = watched.length;
-  const imdbAverageRating = Math.round(
-    average(watched.map((movie) => movie.imdbRating))
+
+  const imdbAverageRating = average(
+    watched.map((movie) => movie.imdbRating)
   ).toFixed(2);
-  const userAverageRating = Math.round(
-    average(watched.map((movie) => movie.userRating))
+
+  const userAverageRating = average(
+    watched.map((movie) => movie.userRating)
   ).toFixed(2);
-  const averageWatched = Math.round(
-    average(watched.map((movie) => movie.runtime))
-  ).toFixed(2);
+
+  const averageWatched = average(watched.map((movie) => movie.runtime)).toFixed(
+    2
+  );
 
   return (
     <Paper

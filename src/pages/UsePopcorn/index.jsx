@@ -82,6 +82,7 @@ const UsePopcorn = () => {
                 movieId={selectedId}
                 setSelectedId={setSelectedId}
                 onAddWatched={handleAddWatchedMovie}
+                moviesWatched={moviesWatched}
               />
             ) : (
               <Box sx={{ height: 700, width: "98%", margin: "auto" }}>

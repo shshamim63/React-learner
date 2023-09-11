@@ -18,10 +18,23 @@ import Loader from "../Loader";
 import { fetchMovieDetails } from "../../api/movie";
 import { customColor } from "../../style";
 
-const MovieDetail = ({ movieId, setSelectedId, onAddWatched }) => {
+const MovieDetail = ({
+  movieId,
+  setSelectedId,
+  onAddWatched,
+  moviesWatched,
+}) => {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+
+  const isWatched = moviesWatched
+    .map((movie) => movie.imdbId)
+    .includes(movieId);
+
+  const currentUserRating = moviesWatched.find(
+    (movie) => movie.imdbId === movieId
+  )?.userRating;
 
   const {
     Title: title,
@@ -145,25 +158,41 @@ const MovieDetail = ({ movieId, setSelectedId, onAddWatched }) => {
                   }}
                 >
                   <Stack>
-                    <StarRating maxRating={10} onSetRating={setUserRating} />
-                    {userRating > 0 && (
-                      <Button
-                        variant="outlined"
-                        sx={{
-                          background: customColor.deepPurple.fade,
-                          width: "50%",
-                          margin: "auto",
-                          marginTop: 2,
-                          color: "white",
-                          "&:hover": {
-                            background: customColor.blue.fade,
-                          },
-                        }}
-                        startIcon={<AddIcon />}
-                        onClick={handleAdd}
+                    {!isWatched ? (
+                      <>
+                        <StarRating
+                          maxRating={10}
+                          onSetRating={setUserRating}
+                        />
+                        {userRating > 0 && (
+                          <Button
+                            variant="outlined"
+                            sx={{
+                              background: customColor.deepPurple.fade,
+                              width: "50%",
+                              margin: "auto",
+                              marginTop: 2,
+                              color: "white",
+                              "&:hover": {
+                                background: customColor.blue.fade,
+                              },
+                            }}
+                            startIcon={<AddIcon />}
+                            onClick={handleAdd}
+                          >
+                            Add to list
+                          </Button>
+                        )}
+                      </>
+                    ) : (
+                      <Typography
+                        variant="overline"
+                        textAlign="center"
+                        lineHeight={8}
                       >
-                        Add to list
-                      </Button>
+                        You have already rated this movie with{" "}
+                        {currentUserRating}
+                      </Typography>
                     )}
                   </Stack>
                 </Box>
@@ -183,7 +212,7 @@ const MovieDetail = ({ movieId, setSelectedId, onAddWatched }) => {
                     {plot}
                   </Typography>
                   <Typography variant="caption" display="block">
-                    Starring{actors}
+                    Starring {actors}
                   </Typography>
                   <Typography variant="caption" display="block">
                     Directed By {director}
