@@ -4,11 +4,17 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import { useState } from "react";
 import { customColor } from "../../style";
 
-const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
+const StarRating = ({
+  maxRating = 5,
+  defaultRating = 0,
+  size = "small",
+  onSetRating,
+}) => {
   const [rating, setRating] = useState(defaultRating);
   const [tempRating, setTempRating] = useState(0);
 
   const handleRating = (rating) => {
+    onSetRating(rating);
     setRating(rating);
   };
 

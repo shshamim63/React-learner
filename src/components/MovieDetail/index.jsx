@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { backButton } from "./style";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Box,
+  Button,
   Paper,
   IconButton,
   Typography,
@@ -12,12 +14,15 @@ import {
 } from "@mui/material";
 
 import StarRating from "../StarRating";
-
+import Loader from "../Loader";
 import { fetchMovieDetails } from "../../api/movie";
 import { customColor } from "../../style";
 
-const MovieDetail = ({ movieId, setIsLoading }) => {
+const MovieDetail = ({ movieId, setSelectedId, onAddWatched }) => {
   const [movie, setMovie] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
+
   const {
     Title: title,
     Year: year,
@@ -31,94 +36,164 @@ const MovieDetail = ({ movieId, setIsLoading }) => {
     Genre: genre,
   } = movie;
 
+  const handleDiscardDetail = () => {
+    setSelectedId(null);
+  };
+
+  const handleAdd = () => {
+    const newWatchedMovie = {
+      imdbId: movieId,
+      title,
+      year,
+      poster,
+      userRating,
+      imdbRating: Number(imdbRating),
+      runtime: Number(runtime.split(" ").at(0)),
+    };
+    onAddWatched(newWatchedMovie);
+    setSelectedId(null);
+  };
+
   useEffect(() => {
     const getMovieDetails = async () => {
+      setIsLoading(true);
       const data = await fetchMovieDetails(movieId);
       setMovie(data);
+      setIsLoading(false);
     };
     getMovieDetails();
   }, [movieId]);
 
   return (
-    <Box>
-      <Paper elevation={2} sx={{ position: "relative", padding: 2 }}>
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{ background: customColor.grey.primary }}
-        >
-          <IconButton aria-label="remove-slected" sx={backButton}>
-            <ArrowBackIosNewIcon sx={{ fontSize: 15 }} />
-          </IconButton>
-          <Avatar
-            src={poster}
-            alt={`Poster of ${movie} movie`}
-            sx={{ width: 150, height: 200 }}
-            variant="square"
-          />
-          <Stack spacing={2} sx={{ background: customColor.grey.primary }}>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontFamily: "monoscope",
-                color: customColor.indigo.secondary,
-                fontWeight: "bold",
-              }}
-            >
-              {title}
-            </Typography>
-            <Typography variant="body2" sx={{ fontFamily: "monoscope" }}>
-              {released} - {runtime}
-            </Typography>
-            <Typography variant="body2" sx={{ fontFamily: "monoscope" }}>
-              {genre}
-            </Typography>
-            <Typography variant="body2" sx={{ fontFamily: "monoscope" }}>
-              ⭐️ {imdbRating} IMDB rating
-            </Typography>
-          </Stack>
-        </Stack>
-      </Paper>
-      <Box
-        sx={{
-          marginTop: 1,
-          minHeight: 460,
-          background: customColor.grey.light,
-          paddingTop: 5,
-        }}
-      >
-        <Box
-          sx={{
-            margin: 2,
-            background: customColor.blue.light,
-            borderRadius: 2,
-          }}
-        >
-          <StarRating maxRating={10} />
+    <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
+      {isLoading ? (
+        <Box sx={{ position: "relative", top: 155 }}>
+          <Loader></Loader>
         </Box>
-        <Stack
-          sx={{
-            width: "95%",
-            margin: "auto",
-            padding: 2,
-            background: customColor.grey.fade,
-            color: "white",
-            fontWeight: 800,
-            borderRadius: 2,
-          }}
-          spacing={2}
-        >
-          <Typography variant="body2" display="block" gutterBottom>
-            {plot}
-          </Typography>
-          <Typography variant="caption" display="block">
-            Starring{actors}
-          </Typography>
-          <Typography variant="caption" display="block">
-            Directed By {director}
-          </Typography>
-        </Stack>
-      </Box>
+      ) : (
+        <>
+          {Object.keys(movie).length > 0 && (
+            <>
+              <Paper elevation={2} sx={{ position: "relative", padding: 2 }}>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ background: customColor.grey.primary }}
+                >
+                  <IconButton
+                    aria-label="remove-slected"
+                    sx={backButton}
+                    onClick={handleDiscardDetail}
+                  >
+                    <ArrowBackIosNewIcon sx={{ fontSize: 15 }} />
+                  </IconButton>
+                  <Avatar
+                    src={poster}
+                    alt={`Poster of ${movie} movie`}
+                    sx={{ width: 150, height: 200 }}
+                    variant="square"
+                  />
+                  <Stack
+                    spacing={2}
+                    sx={{ background: customColor.grey.primary }}
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontFamily: "monoscope",
+                        color: customColor.indigo.secondary,
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontFamily: "monoscope" }}
+                    >
+                      {released} - {runtime}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontFamily: "monoscope" }}
+                    >
+                      {genre}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ fontFamily: "monoscope" }}
+                    >
+                      ⭐️ {imdbRating} IMDB rating
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Paper>
+              <Box
+                sx={{
+                  marginTop: 1,
+                  minHeight: 460,
+                  background: customColor.grey.light,
+                  paddingTop: 5,
+                }}
+              >
+                <Box
+                  sx={{
+                    margin: 2,
+                    background: customColor.grey.secondary,
+                    borderRadius: 2,
+                    height: 100,
+                  }}
+                >
+                  <Stack>
+                    <StarRating maxRating={10} onSetRating={setUserRating} />
+                    {userRating > 0 && (
+                      <Button
+                        variant="outlined"
+                        sx={{
+                          background: customColor.deepPurple.fade,
+                          width: "50%",
+                          margin: "auto",
+                          marginTop: 2,
+                          color: "white",
+                          "&:hover": {
+                            background: customColor.blue.fade,
+                          },
+                        }}
+                        startIcon={<AddIcon />}
+                        onClick={handleAdd}
+                      >
+                        Add to list
+                      </Button>
+                    )}
+                  </Stack>
+                </Box>
+                <Stack
+                  sx={{
+                    width: "95%",
+                    margin: "auto",
+                    padding: 2,
+                    background: customColor.grey.fade,
+                    color: "white",
+                    fontWeight: 800,
+                    borderRadius: 2,
+                  }}
+                  spacing={2}
+                >
+                  <Typography variant="body2" display="block" gutterBottom>
+                    {plot}
+                  </Typography>
+                  <Typography variant="caption" display="block">
+                    Starring{actors}
+                  </Typography>
+                  <Typography variant="caption" display="block">
+                    Directed By {director}
+                  </Typography>
+                </Stack>
+              </Box>
+            </>
+          )}
+        </>
+      )}
     </Box>
   );
 };

@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { Grid, Box } from "@mui/material";
 
 import NavbarMovie from "../../components/NavbarMovie";
-import MovieListContainer from "../../components/MovieListContainer";
+import SectionContainer from "../../components/SectionContainer";
 import MovieList from "../../components/MovieList";
 import WatchedMovieList from "../../components/WatchedMovieList";
+import WatchedSummary from "../../components/WatchedSummary";
 import SearchBar from "../../components/SearchBar";
 import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
-
+import MovieDetail from "../../components/MovieDetail";
 import { fetchMovies } from "../../api/movie";
 
 const UsePopcorn = () => {
@@ -20,7 +21,7 @@ const UsePopcorn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
-  const handleOnUpdateWatchedMovieList = (movie) => {
+  const handleAddWatchedMovie = (movie) => {
     setMoviesWatched([...moviesWatched, movie]);
   };
 
@@ -59,7 +60,7 @@ const UsePopcorn = () => {
       </NavbarMovie>
       <Box sx={{ width: "100%" }}>
         <Grid container justifyContent="space-evenly">
-          <MovieListContainer>
+          <SectionContainer>
             <>
               {isLoading && (
                 <Box sx={{ position: "relative", top: 155 }}>
@@ -73,14 +74,21 @@ const UsePopcorn = () => {
                 </MovieList>
               )}
             </>
-          </MovieListContainer>
-          <MovieListContainer>
-            <WatchedMovieList
-              moviesWatched={moviesWatched}
-              movieId={selectedId}
-              handleOnUpdateWatchedMovieList={handleOnUpdateWatchedMovieList}
-            />
-          </MovieListContainer>
+          </SectionContainer>
+          <SectionContainer>
+            {selectedId ? (
+              <MovieDetail
+                movieId={selectedId}
+                setSelectedId={setSelectedId}
+                onAddWatched={handleAddWatchedMovie}
+              />
+            ) : (
+              <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
+                <WatchedSummary watched={moviesWatched} />
+                <WatchedMovieList watched={moviesWatched} />
+              </Box>
+            )}
+          </SectionContainer>
         </Grid>
       </Box>
     </Box>

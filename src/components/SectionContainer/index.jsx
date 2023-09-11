@@ -6,7 +6,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { customColor } from "../../style";
 
-const MovieListContainer = ({ children }) => {
+const SectionContainer = ({ children }) => {
   const [hideList, setHideList] = useState(false);
 
   const toggleHideList = () => {
@@ -50,4 +50,4 @@ const MovieListContainer = ({ children }) => {
   );
 };
 
-export default MovieListContainer;
+export default SectionContainer;
