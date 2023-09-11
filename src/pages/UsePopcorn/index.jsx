@@ -12,6 +12,7 @@ import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
 import MovieDetail from "../../components/MovieDetail";
 import { fetchMovies } from "../../api/movie";
+import { customColor } from "../../style";
 
 const UsePopcorn = () => {
   const [movies, setMovies] = useState([]);
@@ -84,8 +85,26 @@ const UsePopcorn = () => {
               />
             ) : (
               <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
-                <WatchedSummary watched={moviesWatched} />
-                <WatchedMovieList watched={moviesWatched} />
+                {moviesWatched.length > 0 ? (
+                  <>
+                    <WatchedSummary watched={moviesWatched} />
+                    <WatchedMovieList watched={moviesWatched} />
+                  </>
+                ) : (
+                  <Box
+                    sx={{
+                      background: customColor.amber.light,
+                      height: 100,
+                      width: "80%",
+                      margin: "auto",
+                      borderRadius: 3,
+                      textAlign: "center",
+                      lineHeight: 3,
+                    }}
+                  >
+                    We have awesome movies, lets add them to your list
+                  </Box>
+                )}
               </Box>
             )}
           </SectionContainer>
