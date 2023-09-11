@@ -2,6 +2,7 @@ import { Stack, IconButton, Typography } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import { useState } from "react";
+import { customColor } from "../../style";
 
 const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
   const [rating, setRating] = useState(defaultRating);
@@ -16,7 +17,7 @@ const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
   };
 
   return (
-    <Stack direction="row">
+    <Stack direction="row" justifyContent="space-between">
       {Array.from({ length: maxRating }, (_, i) => {
         if (tempRating ? tempRating >= i + 1 : rating >= i + 1) {
           return (
@@ -24,6 +25,7 @@ const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
               aria-label="star"
               size={size}
               key={i}
+              sx={{ color: customColor.yellow.deep }}
               onClick={() => handleRating(i + 1)}
               onMouseEnter={() => handleTempRating(i + 1)}
               onMouseLeave={() => handleTempRating(0)}
@@ -40,6 +42,7 @@ const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
               onClick={() => handleRating(i + 1)}
               onMouseEnter={() => handleTempRating(i + 1)}
               onMouseLeave={() => handleTempRating(0)}
+              sx={{ color: customColor.yellow.deep }}
             >
               <StarBorderIcon />
             </IconButton>
@@ -49,7 +52,9 @@ const StarRating = ({ maxRating = 5, defaultRating = 0, size = "small" }) => {
       <Typography
         variant="subtitle2"
         sx={{
+          fontFamily: "monoscope",
           height: "30px",
+          width: "30px",
           lineHeight: 2.7,
           marginLeft: 1,
           fontWeight: "bold",

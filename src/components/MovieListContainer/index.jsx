@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Grid, IconButton, Paper } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -23,7 +23,7 @@ const MovieListContainer = ({ children }) => {
         minHeight: 700,
         maxHeight: 700,
         width: "100%",
-        background: customColor.grey.secondary,
+        background: customColor.grey.fade,
         position: "relative",
       }}
     >
@@ -31,7 +31,16 @@ const MovieListContainer = ({ children }) => {
         aria-label="delete"
         size="small"
         onClick={toggleHideList}
-        sx={{ position: "absolute", right: 0, top: 0, zIndex: 100 }}
+        sx={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          zIndex: 100,
+          background: customColor.amber.deep,
+          "&:hover": {
+            background: customColor.amber.light,
+          },
+        }}
       >
         {hideList && <AddCircleOutlineIcon fontSize="inherit" />}
         {!hideList && <RemoveCircleOutlineIcon fontSize="inherit" />}

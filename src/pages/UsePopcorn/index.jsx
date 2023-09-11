@@ -18,7 +18,7 @@ const UsePopcorn = () => {
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null);
 
   const handleOnUpdateWatchedMovieList = (movie) => {
     setMoviesWatched([...moviesWatched, movie]);
@@ -68,10 +68,7 @@ const UsePopcorn = () => {
               )}
               {error && <MovieError message={error} />}
               {!isLoading && !error && (
-                <MovieList
-                  movies={movies}
-                  handleSelectMovie={setSelectedMovieId}
-                >
+                <MovieList movies={movies} handleSelectMovie={setSelectedId}>
                   Movie List
                 </MovieList>
               )}
@@ -80,9 +77,8 @@ const UsePopcorn = () => {
           <MovieListContainer>
             <WatchedMovieList
               moviesWatched={moviesWatched}
-              movieId={selectedMovieId}
+              movieId={selectedId}
               handleOnUpdateWatchedMovieList={handleOnUpdateWatchedMovieList}
-              setSelectedMovieId={setSelectedMovieId}
             />
           </MovieListContainer>
         </Grid>

@@ -1,49 +1,19 @@
-import { useState, useEffect } from "react";
-import { Box, IconButton } from "@mui/material";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Box } from "@mui/material";
 
-import SelectedMovie from "../../components/SelectedMovie";
+import MovieDetail from "../MovieDetail";
 import Loader from "../Loader";
+import { useState } from "react";
 
-import { getMovieDetails } from "../../api/movie";
-
-const WatchedMovieList = ({ moviesWatched, movieId, setSelectedMovieId }) => {
-  const [selectedMovie, setSelectedMovie] = useState(null);
+const WatchedMovieList = ({ moviesWatched, movieId }) => {
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!movieId) {
-      setSelectedMovie(null);
-      return;
-    }
-    const movieDetails = async () => {
-      setIsLoading(true);
-      const data = await getMovieDetails(movieId);
-      setSelectedMovie(data);
-      setIsLoading(false);
-    };
-    movieDetails();
-  }, [movieId]);
-
   return (
-    <Box sx={{ height: 700, width: "100%" }}>
+    <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
       {isLoading && (
         <Box sx={{ position: "relative", top: 155 }}>
           <Loader></Loader>
         </Box>
       )}
-      {!isLoading && selectedMovie && (
-        <IconButton
-          aria-label="remove-slected"
-          sx={{ position: "absolute", left: 3 }}
-          onClick={() => setSelectedMovieId(null)}
-        >
-          <ArrowBackIosNewIcon />
-        </IconButton>
-      )}
-      {!isLoading && selectedMovie && (
-        <SelectedMovie selectedMovie={selectedMovie}></SelectedMovie>
-      )}
+      <MovieDetail movieId={movieId} setIsLoading={setIsLoading}></MovieDetail>
     </Box>
   );
 };

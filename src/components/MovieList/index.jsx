@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 
-import Movie from "../Movie";
+import MovieItem from "../MovieItem";
 
 const MovieList = ({ movies, handleSelectMovie }) => {
   return (
@@ -15,11 +15,11 @@ const MovieList = ({ movies, handleSelectMovie }) => {
       }}
     >
       {movies.map((movie) => (
-        <Movie
+        <MovieItem
           movie={movie}
           key={movie.imdbID}
           handleSelectMovie={handleSelectMovie}
-        ></Movie>
+        />
       ))}
     </Stack>
   );

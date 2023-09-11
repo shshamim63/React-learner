@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { customColor } from "../../style";
 
-const Movie = ({ movie, handleSelectMovie }) => {
+const MovieItem = ({ movie, handleSelectMovie }) => {
   const handleSelect = () => {
     handleSelectMovie(movie.imdbID);
   };
@@ -47,4 +47,4 @@ const Movie = ({ movie, handleSelectMovie }) => {
   );
 };
 
-export default Movie;
+export default MovieItem;
