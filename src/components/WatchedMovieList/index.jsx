@@ -3,7 +3,7 @@ import { Box, Stack } from "@mui/material";
 import WatchedMovieInfo from "../WatchMovieInfo";
 import { customColor } from "../../style";
 
-const WatchedMovieList = ({ watched }) => {
+const WatchedMovieList = ({ watched, onHandleRemoveMovie }) => {
   return (
     <Box
       sx={{
@@ -19,7 +19,11 @@ const WatchedMovieList = ({ watched }) => {
       {watched.length > 0 && (
         <Stack>
           {watched.map((movie) => (
-            <WatchedMovieInfo watchedMovie={movie} key={movie.imdbId} />
+            <WatchedMovieInfo
+              watchedMovie={movie}
+              key={movie.imdbId}
+              onHandleRemoveMovie={onHandleRemoveMovie}
+            />
           ))}
         </Stack>
       )}

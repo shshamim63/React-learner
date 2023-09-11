@@ -26,6 +26,13 @@ const UsePopcorn = () => {
     setMoviesWatched([...moviesWatched, movie]);
   };
 
+  const handleRemoveMovie = (movieId) => {
+    const updatedMovies = moviesWatched.filter(
+      (movie) => movie.imdbId !== movieId
+    );
+    setMoviesWatched(updatedMovies);
+  };
+
   useEffect(() => {
     const getMovies = async () => {
       try {
@@ -89,7 +96,10 @@ const UsePopcorn = () => {
                 {moviesWatched.length > 0 ? (
                   <>
                     <WatchedSummary watched={moviesWatched} />
-                    <WatchedMovieList watched={moviesWatched} />
+                    <WatchedMovieList
+                      watched={moviesWatched}
+                      onHandleRemoveMovie={handleRemoveMovie}
+                    />
                   </>
                 ) : (
                   <Box
