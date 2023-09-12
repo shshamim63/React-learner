@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useKey } from "../../hooks/useKey";
 
 import { InputBase, IconButton, Stack } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -6,19 +7,13 @@ import SearchIcon from "@mui/icons-material/Search";
 const SearchBar = ({ query, setQuery }) => {
   const inputEl = useRef(null);
 
-  useEffect(() => {
-    const callback = (e) => {
-      if (document.activeElement === inputEl.current) return;
-      if (e.code === "Enter") {
-        inputEl.current.focus();
-        setQuery("");
-      }
-    };
+  const enableFocus = () => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  };
 
-    document.addEventListener("keydown", callback);
-
-    return () => document.removeEventListener("keydown", callback);
-  }, [setQuery]);
+  useKey("Enter", enableFocus);
 
   const handleOnChange = (e) => {
     setQuery(e.target.value);

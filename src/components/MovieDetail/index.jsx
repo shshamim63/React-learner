@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useKey } from "../../hooks/useKey";
+
 import { backButton } from "./style";
 
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -70,19 +72,11 @@ const MovieDetail = ({
     setSectionHeader("UsePopcorn");
   };
 
-  useEffect(() => {
-    const callback = (e) => {
-      if (e.code === "Escape") {
-        setSelectedId(null);
-      }
-    };
+  const resetCurrentSelected = () => {
+    setSelectedId(null);
+  };
 
-    document.addEventListener("keydown", callback);
-
-    return () => {
-      document.removeEventListener("keydown", callback);
-    };
-  }, [setSelectedId]);
+  useKey("Escape", resetCurrentSelected);
 
   useEffect(() => {
     const getMovieDetails = async () => {

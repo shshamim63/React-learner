@@ -11,74 +11,37 @@ import SearchBar from "../../components/SearchBar";
 import MovieError from "../../components/MovieError";
 import Loader from "../../components/Loader";
 import MovieDetail from "../../components/MovieDetail";
-import { fetchMovies } from "../../api/movie";
+
 import { customColor } from "../../style";
+import { useMovies } from "../../hooks/useMovies";
+import { useLocalStorageState } from "../../hooks/useLocalStorageState";
 
 const UsePopcorn = ({ title }) => {
-  const [movies, setMovies] = useState([]);
   const [query, setQuery] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [sectionHeader, setSectionHeader] = useState("UsePopcorn");
-  const [moviesWatched, setMoviesWatched] = useState(() => {
-    const sortedValue = localStorage.getItem("watched");
-    if (sortedValue) return JSON.parse(sortedValue);
-    return [];
-  });
+
+  const resetSelected = () => {
+    setSectionHeader("UsePopcorn");
+    setSelectedId(null);
+  };
+
+  const { movies, isLoading, error } = useMovies(query, resetSelected);
+
+  const [watched, setWatched] = useLocalStorageState([], "watched");
 
   const handleAddWatchedMovie = (movie) => {
-    setMoviesWatched([...moviesWatched, movie]);
+    setWatched([...watched, movie]);
   };
 
   const handleRemoveMovie = (movieId) => {
-    const updatedMovies = moviesWatched.filter(
-      (movie) => movie.imdbId !== movieId
-    );
-    setMoviesWatched(updatedMovies);
+    const updatedMovies = watched.filter((movie) => movie.imdbId !== movieId);
+    setWatched(updatedMovies);
   };
 
   useEffect(() => {
     document.title = title;
   }, [title]);
-
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(moviesWatched));
-  }, [moviesWatched]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const getMovies = async () => {
-      try {
-        setIsLoading(true);
-        const searchResult = await fetchMovies(query, {
-          signal: controller.signal,
-        });
-        if (!searchResult.length) throw new Error("Movie Not found");
-        setMovies(searchResult);
-        setError("");
-      } catch (error) {
-        if (error.message !== "AbortError") {
-          setError(error.message);
-        }
-      }
-      setIsLoading(false);
-    };
-
-    setSectionHeader("UsePopcorn");
-    setSelectedId(null);
-
-    if (query.length < 3) {
-      setMovies([]);
-      setError("");
-      return;
-    }
-    getMovies();
-
-    return () => {
-      controller.abort();
-    };
-  }, [query]);
 
   return (
     <Box
@@ -119,15 +82,15 @@ const UsePopcorn = ({ title }) => {
                 setSelectedId={setSelectedId}
                 setSectionHeader={setSectionHeader}
                 onAddWatched={handleAddWatchedMovie}
-                moviesWatched={moviesWatched}
+                moviesWatched={watched}
               />
             ) : (
               <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
-                {moviesWatched.length > 0 ? (
+                {watched.length > 0 ? (
                   <>
-                    <WatchedSummary watched={moviesWatched} />
+                    <WatchedSummary watched={watched} />
                     <WatchedMovieList
-                      watched={moviesWatched}
+                      watched={watched}
                       onHandleRemoveMovie={handleRemoveMovie}
                     />
                   </>
