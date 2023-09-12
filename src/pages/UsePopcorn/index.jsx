@@ -16,12 +16,16 @@ import { customColor } from "../../style";
 
 const UsePopcorn = ({ title }) => {
   const [movies, setMovies] = useState([]);
-  const [moviesWatched, setMoviesWatched] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [sectionHeader, setSectionHeader] = useState("UsePopcorn");
+  const [moviesWatched, setMoviesWatched] = useState(() => {
+    const sortedValue = localStorage.getItem("watched");
+    if (sortedValue) return JSON.parse(sortedValue);
+    return [];
+  });
 
   const handleAddWatchedMovie = (movie) => {
     setMoviesWatched([...moviesWatched, movie]);
@@ -37,6 +41,10 @@ const UsePopcorn = ({ title }) => {
   useEffect(() => {
     document.title = title;
   }, [title]);
+
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(moviesWatched));
+  }, [moviesWatched]);
 
   useEffect(() => {
     const controller = new AbortController();
