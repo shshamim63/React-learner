@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import BentoIcon from "@mui/icons-material/Bento";
 
-const NavbarMovie = ({ children }) => {
+const NavbarMovie = ({ sectionTitle, children }) => {
   return (
     <AppBar position="static" sx={{ background: customColor.amber.deep }}>
       <Toolbar>
@@ -31,7 +31,7 @@ const NavbarMovie = ({ children }) => {
             mt: 0.5,
           }}
         >
-          UsePopcorn
+          {sectionTitle}
         </Typography>
         <Box
           sx={{

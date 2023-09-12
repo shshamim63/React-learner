@@ -14,13 +14,14 @@ import MovieDetail from "../../components/MovieDetail";
 import { fetchMovies } from "../../api/movie";
 import { customColor } from "../../style";
 
-const UsePopcorn = () => {
+const UsePopcorn = ({ title }) => {
   const [movies, setMovies] = useState([]);
   const [moviesWatched, setMoviesWatched] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
+  const [sectionHeader, setSectionHeader] = useState("UsePopcorn");
 
   const handleAddWatchedMovie = (movie) => {
     setMoviesWatched([...moviesWatched, movie]);
@@ -34,25 +35,41 @@ const UsePopcorn = () => {
   };
 
   useEffect(() => {
+    document.title = title;
+  }, [title]);
+
+  useEffect(() => {
+    const controller = new AbortController();
     const getMovies = async () => {
       try {
         setIsLoading(true);
-        const searchResult = await fetchMovies(query);
+        const searchResult = await fetchMovies(query, {
+          signal: controller.signal,
+        });
         if (!searchResult.length) throw new Error("Movie Not found");
         setMovies(searchResult);
+        setError("");
       } catch (error) {
-        setError(error.message);
+        if (error.message !== "AbortError") {
+          setError(error.message);
+        }
       }
       setIsLoading(false);
     };
+
+    setSectionHeader("UsePopcorn");
+    setSelectedId(null);
 
     if (query.length < 3) {
       setMovies([]);
       setError("");
       return;
     }
-
     getMovies();
+
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   return (
@@ -63,7 +80,7 @@ const UsePopcorn = () => {
         mt: 2,
       }}
     >
-      <NavbarMovie>
+      <NavbarMovie sectionTitle={sectionHeader}>
         <SearchBar query={query} setQuery={setQuery} />
       </NavbarMovie>
       <Box sx={{ width: "100%" }}>
@@ -77,7 +94,11 @@ const UsePopcorn = () => {
               )}
               {error && <MovieError message={error} />}
               {!isLoading && !error && (
-                <MovieList movies={movies} handleSelectMovie={setSelectedId}>
+                <MovieList
+                  movies={movies}
+                  handleSelectMovie={setSelectedId}
+                  setSectionHeader={setSectionHeader}
+                >
                   Movie List
                 </MovieList>
               )}
@@ -88,6 +109,7 @@ const UsePopcorn = () => {
               <MovieDetail
                 movieId={selectedId}
                 setSelectedId={setSelectedId}
+                setSectionHeader={setSectionHeader}
                 onAddWatched={handleAddWatchedMovie}
                 moviesWatched={moviesWatched}
               />

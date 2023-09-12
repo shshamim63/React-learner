@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 
 import MovieItem from "../MovieItem";
 
-const MovieList = ({ movies, handleSelectMovie }) => {
+const MovieList = ({ movies, handleSelectMovie, setSectionHeader }) => {
   return (
     <Stack
       sx={{
@@ -19,6 +19,7 @@ const MovieList = ({ movies, handleSelectMovie }) => {
           movie={movie}
           key={movie.imdbID}
           handleSelectMovie={handleSelectMovie}
+          setSectionHeader={setSectionHeader}
         />
       ))}
     </Stack>

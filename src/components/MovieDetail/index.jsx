@@ -23,6 +23,7 @@ const MovieDetail = ({
   setSelectedId,
   onAddWatched,
   moviesWatched,
+  setSectionHeader,
 }) => {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -51,6 +52,7 @@ const MovieDetail = ({
 
   const handleDiscardDetail = () => {
     setSelectedId(null);
+    setSectionHeader("UsePopcorn");
   };
 
   const handleAdd = () => {
@@ -65,7 +67,22 @@ const MovieDetail = ({
     };
     onAddWatched(newWatchedMovie);
     setSelectedId(null);
+    setSectionHeader("UsePopcorn");
   };
+
+  useEffect(() => {
+    const callback = (e) => {
+      if (e.code === "Escape") {
+        setSelectedId(null);
+      }
+    };
+
+    document.addEventListener("keydown", callback);
+
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [setSelectedId]);
 
   useEffect(() => {
     const getMovieDetails = async () => {

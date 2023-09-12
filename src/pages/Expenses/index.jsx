@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Grid, Paper, Typography, Button, Stack } from "@mui/material";
 
 import ContributorList from "../../components/ContributorList";
@@ -6,7 +6,7 @@ import AddFriendForm from "../../components/AddFriendForm";
 import SplitBillForm from "../../components/SplitBillForm";
 import { customColor } from "../../style";
 
-const Expenses = () => {
+const Expenses = ({ title }) => {
   const [contributors, setContributors] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [showForm, setshowForm] = useState(false);
@@ -38,6 +38,11 @@ const Expenses = () => {
     );
     setSelectedFriend(null);
   };
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
   return (
     <>
       <Paper

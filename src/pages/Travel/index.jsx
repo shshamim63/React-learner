@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import TravelLogo from "../../components/TravelLogo";
 import TravelForm from "../../components/TravelForm";
 import PackingList from "../../components/PackingList";
 import PackingSummary from "../../components/PackingSummary";
 
-const Travel = () => {
+const Travel = ({ title }) => {
   const [packingItem, setPackingItem] = useState([]);
 
   const handleAddItem = (newItem) => {
@@ -23,6 +23,10 @@ const Travel = () => {
       )
     );
   };
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   return (
     <>

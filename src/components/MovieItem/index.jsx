@@ -1,9 +1,10 @@
 import { Stack, Typography } from "@mui/material";
 import { customColor } from "../../style";
 
-const MovieItem = ({ movie, handleSelectMovie }) => {
+const MovieItem = ({ movie, handleSelectMovie, setSectionHeader }) => {
   const handleSelect = () => {
     handleSelectMovie(movie.imdbID);
+    setSectionHeader(movie.Title);
   };
 
   return (

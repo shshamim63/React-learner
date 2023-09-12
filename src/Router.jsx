@@ -9,12 +9,15 @@ import HowReactWorks from "./pages/HowReactWorks";
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Step />} />
-      <Route path="tracker" element={<Step />} />
-      <Route path="travel" element={<Travel />} />
-      <Route path="expenses" element={<Expenses />} />
-      <Route path="usepopcorn" element={<UsePopcorn />} />
-      <Route path="howreactworks" element={<HowReactWorks />} />
+      <Route path="/" element={<Step title="Home" />} />
+      <Route path="tracker" element={<Step title="Tracker" />} />
+      <Route path="travel" element={<Travel title="Travel" />} />
+      <Route path="expenses" element={<Expenses title="Expenses" />} />
+      <Route path="usepopcorn" element={<UsePopcorn title="UsePopcorn" />} />
+      <Route
+        path="howreactworks"
+        element={<HowReactWorks title="HowReactWorks" />}
+      />
     </Routes>
   );
 };

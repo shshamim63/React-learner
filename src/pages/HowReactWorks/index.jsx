@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { customColor } from "../../style";
 
 import { Box, Typography } from "@mui/material";
@@ -38,7 +40,11 @@ const tabs = [
   },
 ];
 
-const HowReactWorks = () => {
+const HowReactWorks = ({ title }) => {
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
   return (
     <Box
       sx={{

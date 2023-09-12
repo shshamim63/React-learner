@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Container,
   Button,
@@ -18,7 +18,7 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 
 const messages = ["Learn React", "Apply for jobs", "Invest your new income"];
 
-export const Step = () => {
+export const Step = ({ title }) => {
   const [stepNumber, setStepNumber] = useState(1);
 
   const [isOpen, setIsOpen] = useState(true);
@@ -34,6 +34,10 @@ export const Step = () => {
     setIsOpen(!isOpen);
     setStepNumber(1);
   };
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
 
   return (
     <Container maxWidth="lg">
