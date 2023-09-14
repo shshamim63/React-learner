@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 
-const MovieError = ({ message }) => {
+const BasicError = ({ message }) => {
   return (
     <Box sx={{ height: 200, mt: 20 }}>
       <Typography
@@ -12,4 +12,4 @@ const MovieError = ({ message }) => {
   );
 };
 
-export default MovieError;
+export default BasicError;

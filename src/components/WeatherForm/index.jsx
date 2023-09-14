@@ -2,17 +2,23 @@ import { Stack, Button, Paper, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { customColor } from "../../style";
 
-const WeatherForm = () => {
+const WeatherForm = ({ setLocation }) => {
   const inputEl = useRef(null);
-  const [location, setLocation] = useState("");
+  const [input, setInput] = useState("");
 
   const onChangeLocation = (e) => {
-    setLocation(e.target.value);
+    setInput(e.target.value);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setInput("");
+    setLocation(input);
   };
 
   useEffect(() => {
-    if (!location) inputEl.current.focus();
-  }, [location]);
+    if (!input) inputEl.current.focus();
+  }, [input]);
 
   return (
     <Paper
@@ -24,13 +30,13 @@ const WeatherForm = () => {
         background: customColor.amber.secondary,
       }}
     >
-      <form>
+      <form onSubmit={onSubmit}>
         <Stack justifyContent="center" spacing={0.5}>
           <TextField
             fullWidth
             placeholder="Enter Location"
             size="small"
-            value={location}
+            value={input}
             onChange={onChangeLocation}
             inputRef={inputEl}
           ></TextField>
@@ -41,7 +47,7 @@ const WeatherForm = () => {
             }}
           >
             {" "}
-            GetInfo
+            Get Info
           </Button>
         </Stack>
       </form>

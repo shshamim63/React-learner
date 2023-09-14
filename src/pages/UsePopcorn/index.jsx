@@ -8,7 +8,7 @@ import MovieList from "../../components/MovieList";
 import WatchedMovieList from "../../components/WatchedMovieList";
 import WatchedSummary from "../../components/WatchedSummary";
 import SearchBar from "../../components/SearchBar";
-import MovieError from "../../components/MovieError";
+import BasicError from "../../components/BasicError";
 import Loader from "../../components/Loader";
 import MovieDetail from "../../components/MovieDetail";
 
@@ -63,7 +63,7 @@ const UsePopcorn = ({ title }) => {
                   <Loader></Loader>
                 </Box>
               )}
-              {error && <MovieError message={error} />}
+              {error && <BasicError message={error} />}
               {!isLoading && !error && (
                 <MovieList
                   movies={movies}
