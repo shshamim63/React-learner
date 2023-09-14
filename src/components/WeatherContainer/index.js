@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { customColor } from "../../style";
 import { useState } from "react";
 
