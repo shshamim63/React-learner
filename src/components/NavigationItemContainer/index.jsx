@@ -15,6 +15,7 @@ import SafetyDividerIcon from "@mui/icons-material/SafetyDivider";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import QuizIcon from "@mui/icons-material/Quiz";
 
 import { pages } from "../../contants/utils";
 
@@ -32,6 +33,8 @@ const pageIcon = (page) => {
       return <LiveTvIcon />;
     case "HowReactWorks":
       return <AcUnitIcon />;
+    case "ReactQuiz":
+      return <QuizIcon />;
     default:
   }
 };

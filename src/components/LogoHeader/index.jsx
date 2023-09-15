@@ -15,24 +15,24 @@ themeHeader.typography.h2 = {
   },
 };
 
-const TravelLogo = () => {
+const LogoHeader = ({ title, bgColor = "wheat" }) => {
   return (
     <Container>
       <ThemeProvider theme={themeHeader}>
         <Typography
           variant="h2"
           sx={{
-            backgroundColor: "wheat",
+            backgroundColor: bgColor,
             height: 85,
             textAlign: "center",
             mt: 2,
           }}
         >
-          🌴 Far Away 🧳
+          {title}
         </Typography>
       </ThemeProvider>
     </Container>
   );
 };
 
-export default TravelLogo;
+export default LogoHeader;

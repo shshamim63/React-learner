@@ -5,4 +5,5 @@ export const pages = [
   "Worldwide",
   "UsePopcorn",
   "HowReactWorks",
+  "ReactQuiz",
 ];

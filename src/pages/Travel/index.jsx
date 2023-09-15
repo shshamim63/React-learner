@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import TravelLogo from "../../components/TravelLogo";
+import LogoHeader from "../../components/LogoHeader";
 import TravelForm from "../../components/TravelForm";
 import PackingList from "../../components/PackingList";
 import PackingSummary from "../../components/PackingSummary";
@@ -30,7 +30,7 @@ const Travel = ({ title }) => {
 
   return (
     <>
-      <TravelLogo />
+      <LogoHeader title="🌴 Far Away 🧳" />
       <TravelForm addItem={handleAddItem} />
       <PackingList
         items={packingItem}
