@@ -60,7 +60,7 @@ const UsePopcorn = ({ title }) => {
             <>
               {isLoading && (
                 <Box sx={{ position: "relative", top: 155 }}>
-                  <Loader></Loader>
+                  <Loader />
                 </Box>
               )}
               {error && <BasicError message={error} />}

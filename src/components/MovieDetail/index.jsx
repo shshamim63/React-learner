@@ -92,7 +92,7 @@ const MovieDetail = ({
     <Box sx={{ height: 700, width: "98%", margin: "auto" }}>
       {isLoading ? (
         <Box sx={{ position: "relative", top: 155 }}>
-          <Loader></Loader>
+          <Loader />
         </Box>
       ) : (
         <>

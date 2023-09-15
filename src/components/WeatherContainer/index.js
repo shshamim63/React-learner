@@ -28,7 +28,7 @@ const WeatherContainer = () => {
       <WeatherForm setLocation={setLocation} />
       {isLoading && (
         <Box sx={{ width: "50%", margin: "auto", mt: 10 }}>
-          <Loader></Loader>
+          <Loader />
         </Box>
       )}
       {!isLoading && error && <BasicError message={error} />}
