@@ -8,7 +8,7 @@ const ReactQuiz = () => {
   return (
     <Container
       maxWidth="lg"
-      sx={{ mt: 3, background: customColor.grey.fade, minHeight: 450 }}
+      sx={{ mt: 3, background: customColor.grey.fade, minHeight: "90vh" }}
     >
       <LogoHeader title="📝 React Quiz 🕐" bgColor={customColor.indigo.light} />
       <QuizContainer />

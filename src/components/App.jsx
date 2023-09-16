@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import NavBarMain from "./components/NavbarMain";
-import AppRouter from "./Router";
+import NavBarMain from "./NavbarMain";
+import AppRouter from "../Router";
 
 const theme = createTheme();
 

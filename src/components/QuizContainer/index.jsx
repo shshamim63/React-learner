@@ -28,7 +28,10 @@ const reducer = (state, action) => {
 };
 
 const QuizContainer = () => {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, currentQuestionIndex }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
   const numQuestion = questions.length;
 
   const onStartQuiz = () => {
@@ -68,7 +71,9 @@ const QuizContainer = () => {
       {status === "fetchFailed" && (
         <BasicError message=" 💥 There was an error fetching questions 💥" />
       )}
-      {status === "active" && <Question />}
+      {status === "active" && (
+        <Question question={questions[currentQuestionIndex]} />
+      )}
     </Box>
   );
 };

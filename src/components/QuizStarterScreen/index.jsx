@@ -4,10 +4,19 @@ import { customColor } from "../../style";
 const QuizStarterScreen = ({ numQuestion, onStartQuiz }) => {
   return (
     <Stack justifyContent="center" alignItems="center">
-      <Typography variant="h2" sx={{ color: "white" }}>
+      <Typography
+        sx={{ color: "white", fontSize: { xs: 30, md: 50 }, fontWeight: 800 }}
+      >
         Welcome to The React Quiz
       </Typography>
-      <Typography variant="h5" sx={{ color: "white", mt: 3 }}>
+      <Typography
+        sx={{
+          color: "white",
+          mt: 3,
+          fontSize: { xs: 18, md: 30 },
+          fontWeight: 400,
+        }}
+      >
         {" "}
         {numQuestion} questions to test your react mastery
       </Typography>
