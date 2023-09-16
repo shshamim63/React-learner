@@ -3,7 +3,7 @@ import { customColor } from "../../style";
 
 import QuestionOption from "../QuestionOption";
 
-const Question = ({ question }) => {
+const Question = ({ question, dispatch, answer }) => {
   return (
     <Paper
       sx={{
@@ -24,7 +24,7 @@ const Question = ({ question }) => {
       >
         {question.question}
       </Typography>
-      <QuestionOption options={question.options} />
+      <QuestionOption question={question} dispatch={dispatch} answer={answer} />
     </Paper>
   );
 };

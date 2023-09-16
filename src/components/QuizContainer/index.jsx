@@ -12,6 +12,7 @@ const initialState = {
   questions: [],
   status: "loading",
   currentQuestionIndex: 0,
+  answer: null,
 };
 
 const reducer = (state, action) => {
@@ -22,16 +23,16 @@ const reducer = (state, action) => {
       return { ...state, status: "error" };
     case "start":
       return { ...state, status: "active" };
+    case "answer":
+      return { ...state, answer: action.payload };
     default:
       throw new Error("Unknown action");
   }
 };
 
 const QuizContainer = () => {
-  const [{ questions, status, currentQuestionIndex }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ questions, status, currentQuestionIndex, answer }, dispatch] =
+    useReducer(reducer, initialState);
   const numQuestion = questions.length;
 
   const onStartQuiz = () => {
@@ -72,7 +73,11 @@ const QuizContainer = () => {
         <BasicError message=" 💥 There was an error fetching questions 💥" />
       )}
       {status === "active" && (
-        <Question question={questions[currentQuestionIndex]} />
+        <Question
+          question={questions[currentQuestionIndex]}
+          dispatch={dispatch}
+          answer={answer}
+        />
       )}
     </Box>
   );

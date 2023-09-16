@@ -9,6 +9,7 @@ import {
   purple,
   red,
   yellow,
+  green,
 } from "@mui/material/colors";
 
 export const customColor = {
@@ -46,6 +47,13 @@ export const customColor = {
     primary: grey[500],
     fade: grey[800],
     deep: grey[900],
+  },
+  green: {
+    light: green[100],
+    secondary: green[300],
+    primary: green[500],
+    fade: green[800],
+    deep: green[900],
   },
   orange: {
     light: orange[100],
