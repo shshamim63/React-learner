@@ -9,11 +9,6 @@ const NextButton = ({ dispatch, numQuestion, index }) => {
         <Button
           variant="outlined"
           sx={{
-            minWidth: "20%",
-            maxWidth: "30%",
-            mt: 3,
-            display: "flex",
-            float: "right",
             color: customColor.indigo.fade,
           }}
           onClick={() => dispatch({ type: "next" })}
@@ -29,11 +24,6 @@ const NextButton = ({ dispatch, numQuestion, index }) => {
         <Button
           variant="outlined"
           sx={{
-            minWidth: "20%",
-            maxWidth: "30%",
-            mt: 3,
-            display: "flex",
-            float: "right",
             color: customColor.indigo.fade,
           }}
           onClick={() => dispatch({ type: "finish" })}
