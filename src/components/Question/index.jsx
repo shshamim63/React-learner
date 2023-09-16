@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { customColor } from "../../style";
 
 import QuestionOption from "../QuestionOption";
@@ -9,7 +9,7 @@ const Question = ({ question, dispatch, answer }) => {
       <Typography
         textAlign="center"
         sx={{
-          fontSize: { xs: 18, md: 22, lg: 28 },
+          fontSize: { xs: 14, md: 18, lg: 20 },
           color: customColor.orange.fade,
         }}
       >

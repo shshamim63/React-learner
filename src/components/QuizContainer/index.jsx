@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Paper } from "@mui/material";
+import { Box, Stack, Paper } from "@mui/material";
 import { useEffect, useReducer } from "react";
 
 import { customColor } from "../../style";
@@ -6,9 +6,12 @@ import { customColor } from "../../style";
 import Loader from "../Loader";
 import BasicError from "../BasicError";
 import Question from "../Question";
+import Progress from "../Progress";
 
 import { fetchQuestions } from "../../api/questions";
 import QuizStarterScreen from "../QuizStarterScreen";
+import FinishedScreen from "../FinishScreen";
+import NextButton from "../NextButton";
 
 const initialState = {
   questions: [],
@@ -16,6 +19,7 @@ const initialState = {
   currentQuestionIndex: 0,
   answer: null,
   points: 0,
+  highscore: 0,
 };
 
 const reducer = (state, action) => {
@@ -43,15 +47,32 @@ const reducer = (state, action) => {
         currentQuestionIndex: state.currentQuestionIndex + 1,
         answer: null,
       };
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
+      };
+    case "restart":
+      return {
+        ...initialState,
+        questions: state.questions,
+        status: "ready",
+        highscore: state.highscore,
+      };
     default:
       throw new Error("Unknown action");
   }
 };
 
 const QuizContainer = () => {
-  const [{ questions, status, currentQuestionIndex, answer }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { questions, status, currentQuestionIndex, answer, points, highscore },
+    dispatch,
+  ] = useReducer(reducer, initialState);
   const numQuestion = questions.length;
+  const totalPoints = questions.reduce((prev, curr) => prev + curr.points, 0);
 
   const onStartQuiz = () => {
     dispatch({ type: "start" });
@@ -90,6 +111,14 @@ const QuizContainer = () => {
       {status === "fetchFailed" && (
         <BasicError message=" 💥 There was an error fetching questions 💥" />
       )}
+      {status === "finished" && (
+        <FinishedScreen
+          points={points}
+          maxPoint={totalPoints}
+          highscore={highscore}
+          dispatch={dispatch}
+        />
+      )}
       {status === "active" && (
         <Paper
           sx={{
@@ -101,29 +130,24 @@ const QuizContainer = () => {
             borderRadius: 3,
           }}
         >
-          <Stack>
+          <Progress
+            index={currentQuestionIndex}
+            numQuestion={numQuestion}
+            points={points}
+            total={totalPoints}
+          />
+          <Stack sx={{ mt: 3 }}>
             <Question
               question={questions[currentQuestionIndex]}
               dispatch={dispatch}
               answer={answer}
             />
             {answer != null && (
-              <Box>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    minWidth: "20%",
-                    maxWidth: "30%",
-                    mt: 3,
-                    display: "flex",
-                    float: "right",
-                    color: customColor.indigo.fade,
-                  }}
-                  onClick={() => dispatch({ type: "next" })}
-                >
-                  Next
-                </Button>
-              </Box>
+              <NextButton
+                dispatch={dispatch}
+                numQuestion={numQuestion}
+                index={currentQuestionIndex}
+              />
             )}
           </Stack>
         </Paper>
