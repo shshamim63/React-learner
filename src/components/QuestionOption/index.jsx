@@ -21,10 +21,10 @@ const QuestionOption = ({ question, answer, dispatch }) => {
                     ? customColor.green.light
                     : customColor.orange.light
                   : customColor.grey.light,
-              height: 50,
-              padding: 3,
+              padding: 2,
               borderRadius: 5,
               fontWeight: 600,
+              textTransform: "none",
             }}
             disabled={answer != null}
             key={index}

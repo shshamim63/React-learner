@@ -5,16 +5,7 @@ import QuestionOption from "../QuestionOption";
 
 const Question = ({ question, dispatch, answer }) => {
   return (
-    <Paper
-      sx={{
-        minWidth: 350,
-        maxWidth: "70%",
-        background: customColor.grey.secondary,
-        margin: "auto",
-        padding: 5,
-        borderRadius: 3,
-      }}
-    >
+    <>
       <Typography
         textAlign="center"
         sx={{
@@ -25,7 +16,7 @@ const Question = ({ question, dispatch, answer }) => {
         {question.question}
       </Typography>
       <QuestionOption question={question} dispatch={dispatch} answer={answer} />
-    </Paper>
+    </>
   );
 };
 

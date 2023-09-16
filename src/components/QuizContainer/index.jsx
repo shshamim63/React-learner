@@ -1,5 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Button, Stack, Paper } from "@mui/material";
 import { useEffect, useReducer } from "react";
+
+import { customColor } from "../../style";
 
 import Loader from "../Loader";
 import BasicError from "../BasicError";
@@ -13,6 +15,7 @@ const initialState = {
   status: "loading",
   currentQuestionIndex: 0,
   answer: null,
+  points: 0,
 };
 
 const reducer = (state, action) => {
@@ -24,7 +27,22 @@ const reducer = (state, action) => {
     case "start":
       return { ...state, status: "active" };
     case "answer":
-      return { ...state, answer: action.payload };
+      const question = state.questions.at(state.currentQuestionIndex);
+
+      return {
+        ...state,
+        answer: action.payload,
+        points:
+          action.payload === question.correctOption
+            ? state.points + question.points
+            : state.points,
+      };
+    case "next":
+      return {
+        ...state,
+        currentQuestionIndex: state.currentQuestionIndex + 1,
+        answer: null,
+      };
     default:
       throw new Error("Unknown action");
   }
@@ -73,11 +91,42 @@ const QuizContainer = () => {
         <BasicError message=" 💥 There was an error fetching questions 💥" />
       )}
       {status === "active" && (
-        <Question
-          question={questions[currentQuestionIndex]}
-          dispatch={dispatch}
-          answer={answer}
-        />
+        <Paper
+          sx={{
+            minWidth: 350,
+            maxWidth: "70%",
+            background: customColor.grey.secondary,
+            margin: "auto",
+            padding: 5,
+            borderRadius: 3,
+          }}
+        >
+          <Stack>
+            <Question
+              question={questions[currentQuestionIndex]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            {answer != null && (
+              <Box>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    minWidth: "20%",
+                    maxWidth: "30%",
+                    mt: 3,
+                    display: "flex",
+                    float: "right",
+                    color: customColor.indigo.fade,
+                  }}
+                  onClick={() => dispatch({ type: "next" })}
+                >
+                  Next
+                </Button>
+              </Box>
+            )}
+          </Stack>
+        </Paper>
       )}
     </Box>
   );
