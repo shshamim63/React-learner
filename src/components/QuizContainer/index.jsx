@@ -102,14 +102,15 @@ const QuizContainer = () => {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetchQuestions();
-      dispatch({ type: "questionLoaded", payload: response });
+      try {
+        const response = await fetchQuestions();
+        dispatch({ type: "questionLoaded", payload: response });
+      } catch (error) {
+        dispatch({ type: "fetchFailed" });
+      }
     };
-    try {
-      getQuestions();
-    } catch (error) {
-      dispatch({ type: "fetchFailed" });
-    }
+
+    getQuestions();
   }, []);
 
   return (
@@ -120,6 +121,9 @@ const QuizContainer = () => {
         margin: "auto",
       }}
     >
+      {status === "error" && (
+        <BasicError message="Failed to load question, please reload the page" />
+      )}
       {status === "loading" && (
         <Box sx={{ width: "50%", margin: "auto", mt: 10 }}>
           <Loader />
