@@ -5,7 +5,7 @@ import Travel from "./pages/Travel";
 import Expenses from "./pages/Expenses";
 import UsePopcorn from "./pages/UsePopcorn";
 import HowReactWorks from "./pages/HowReactWorks";
-import WorldWide from "./pages/Worldwide";
+import Weather from "./pages/Weather";
 import ReactQuiz from "./pages/ReactQuiz";
 
 const AppRouter = () => {
@@ -20,7 +20,7 @@ const AppRouter = () => {
         path="howreactworks"
         element={<HowReactWorks title="HowReactWorks" />}
       />
-      <Route path="worldwide" element={<WorldWide title="WorldWide" />} />
+      <Route path="weather" element={<Weather title="Weather" />} />
       <Route path="reactquiz" element={<ReactQuiz title="ReactQuiz" />} />
     </Routes>
   );

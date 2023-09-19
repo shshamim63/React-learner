@@ -2,7 +2,7 @@ export const pages = [
   "Tracker",
   "Travel",
   "Expenses",
-  "Worldwide",
+  "Weather",
   "UsePopcorn",
   "HowReactWorks",
   "ReactQuiz",

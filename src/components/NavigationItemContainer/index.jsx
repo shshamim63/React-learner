@@ -12,7 +12,7 @@ import {
 import StairsIcon from "@mui/icons-material/Stairs";
 import LuggageIcon from "@mui/icons-material/Luggage";
 import SafetyDividerIcon from "@mui/icons-material/SafetyDivider";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import QuizIcon from "@mui/icons-material/Quiz";
@@ -27,8 +27,8 @@ const pageIcon = (page) => {
       return <LuggageIcon />;
     case "Expenses":
       return <SafetyDividerIcon />;
-    case "Worldwide":
-      return <TravelExploreIcon />;
+    case "Weather":
+      return <ThunderstormIcon />;
     case "UsePopcorn":
       return <LiveTvIcon />;
     case "HowReactWorks":

@@ -6,7 +6,7 @@ import { customColor } from "../../style";
 
 import WeatherContainer from "../../components/WeatherContainer";
 
-const WorldWide = ({ title }) => {
+const Weather = ({ title }) => {
   useEffect(() => {
     document.title = title;
   }, [title]);
@@ -25,7 +25,7 @@ const WorldWide = ({ title }) => {
             variant="subtitle2"
             noWrap
             component={Link}
-            to="/worldwide"
+            to="/eeather"
             sx={{
               color: customColor.orange.fade,
               fontSize: 18,
@@ -44,4 +44,4 @@ const WorldWide = ({ title }) => {
   );
 };
 
-export default WorldWide;
+export default Weather;
